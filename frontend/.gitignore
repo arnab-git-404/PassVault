@@ -10,6 +10,10 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+.next/             # Next.js cache
+out/              # Next.js output
+build/            # Create React App build folder
+.DS_Store          # macOS folder settings
 *.local
 
 # Editor directories and files
@@ -22,3 +26,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+
+.env
+.venv

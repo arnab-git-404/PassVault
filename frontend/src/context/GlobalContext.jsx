@@ -1,106 +1,78 @@
-import React, {
-  createContext,
-  useReducer,
-  useRef,
-  useEffect,
-  useState,
-} from "react";
-
-export const GlobalContext = createContext();
+// GlobalContext.jsx
+import React, { useState, useEffect } from "react";
+import GlobalContext from "./context"; // Import the context
 
 export const GlobalProvider = ({ children }) => {
-  const navBar = useRef(null);
+  // const [user, setUser] = useState('');
+  // const [userLoggedIn, setUserLoggedIn] = useState(false);
 
-  const navbarToggler = useRef(null);
-
-  const initialState = {
-    isNavExpanded: false,
-    isMobileNavVisible: false,
-  };
-
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  const { isNavExpanded, isMobileNavVisible } = state;
-
-  function reducer(state, action) {
-    switch (action.type) {
-      case "TOGGLE_MOBILE_NAV":
-        return {
-          ...state,
-          isMobileNavVisible: !state.isMobileNavVisible,
-          isNavExpanded: true,
-        };
-      case "SET_NAV_EXPANDED":
-        return {
-          ...state,
-          isNavExpanded: action.payload,
-        };
-      case "CLOSE_MOBILE_NAV":
-        return {
-          ...state,
-          isMobileNavVisible: false,
-        };
-      case "CLICKED_OUTSIDE":
-        return {
-          ...state,
-          isMobileNavVisible: false,
-          isNavExpanded: true,
-        };
-      default:
-        return state;
-    }
-  }
-
+  // // Check if there's a logged-in user in localStorage
   // useEffect(() => {
-  //   function handleClickOutside(event) {
-  //     if (
-  //       isMobileNavVisible &&
-  //       !navBar.current.contains(event.target) &&
-  //       event.target !== navbarToggler.current
-  //     ) {
-  //       console.log('clicked outside');
-  //       dispatch({ type: 'CLICKED_OUTSIDE' });
-  //     }
+  //   const storedUser = localStorage.getItem('user');
+  //   if (storedUser) {
+  //     setUser(storedUser); // Set user state from localStorage
+  //     setUserLoggedIn(true);
   //   }
+  // }, []);
 
-  //   document.addEventListener('click', handleClickOutside);
+  const [masterPassword, setMasterPassword] = useState("");
 
-  //   return () => {
-  //     document.removeEventListener('click', handleClickOutside);
-  //   };
-  // }, [isMobileNavVisible]);
+  const [masterKey, setMasterKey] = useState(null);
+  const [isVaultUnlocked, setIsVaultUnlocked] = useState(false);
 
-  const toggleMobileNav = () => {
-    dispatch({ type: "TOGGLE_MOBILE_NAV" });
+  // Auto-lock after inactivity
+  useEffect(() => {
+    if (isVaultUnlocked) {
+      const timer = setTimeout(() => {
+        lockVault();
+      }, 5 * 60 * 1000); // 5 minutes
+
+      return () => clearTimeout(timer);
+    }
+  }, [isVaultUnlocked]);
+
+
+  const lockVault = () => {
+    setMasterKey(null);
+    setIsVaultUnlocked(false);
   };
 
-  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 1024);
-    };
+  // Initialize state directly from localStorage
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
 
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
+  const [userLoggedIn, setUserLoggedIn] = useState(() => {
+    return !!localStorage.getItem("user") && !!localStorage.getItem("token");
+  });
 
-    return () => {
-      window.removeEventListener("resize", checkMobile);
-    };
-  }, []);
-  
+  const loginUser = (userData) => {
+    setUser(userData);
+    setUserLoggedIn(true);
+    localStorage.setItem("user", JSON.stringify(userData));
+  };
+
+  const logoutUser = () => {
+    setUser(null);
+    setUserLoggedIn(false);
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    localStorage.clear();
+  };
+
   return (
     <GlobalContext.Provider
       value={{
-        navBar,
-        navbarToggler,
-        state,
-        dispatch,
-        isNavExpanded,
-        isMobileNavVisible,
-        toggleMobileNav,
-        isMobile,
-        setIsMobile,
+        user,
+        userLoggedIn,
+        loginUser,
+        logoutUser,
+        setUserLoggedIn,
+        masterPassword,
+        setMasterPassword,
+        lockVault
       }}
     >
       {children}

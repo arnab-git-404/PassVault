@@ -7,8 +7,8 @@ import { GlobalProvider } from './context/GlobalContext.jsx'
 createRoot(document.getElementById('root')).render(
   
     <GlobalProvider>
-    <App />
 
+    <App />
 
     </GlobalProvider>
  

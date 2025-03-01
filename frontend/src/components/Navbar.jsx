@@ -4,13 +4,7 @@ import { FaUserCircle } from "react-icons/fa";
 import ProfileModal from "./ProfileModal";
 
 function Navbar() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const user = {
-        name: "John Doe",
-        email: "example@gmail.com",
-        changePassword: () => alert("Change Password Clicked"),
-        logout: () => alert("Logout Clicked")
-    };
+
 
     return (
         <>
