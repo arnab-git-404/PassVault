@@ -1,0 +1,115 @@
+# # Dependencies
+# node_modules/
+# /.pnp
+# .pnp.js
+# venv/
+# env/
+# __pycache__/
+# *.py[cod]
+# *$py.class
+# .Python
+
+# # Environment variables
+# .env
+# .env.local
+# .env.development.local
+# .env.test.local
+# .env.production.local
+# .vite/
+# .flaskenv*
+# !.env.project
+# !.env.vault
+
+# # Build files
+# dist/
+# build/
+# *.so
+# pip-log.txt
+# pip-delete-this-directory.txt
+
+# # Testing
+# coverage/
+# htmlcov/
+# .tox/
+# .nox/
+# .hypothesis/
+# .pytest_cache/
+# .coverage
+# .coverage.*
+# nosetests.xml
+# coverage.xml
+# *.cover
+
+# # Logs
+# logs
+# *.log
+# npm-debug.log*
+# yarn-debug.log*
+# yarn-error.log*
+# lerna-debug.log*
+# .pnpm-debug.log*
+
+# # Editor directories and files
+# .idea/
+# .vscode/*
+# !.vscode/extensions.json
+# !.vscode/settings.json
+# !.vscode/tasks.json
+# !.vscode/launch.json
+# *.suo
+# *.ntvs*
+# *.njsproj
+# *.sln
+# *.sw?
+# .DS_Store
+# *.sublime-workspace
+# .history/
+
+# # Database
+# *.sqlite3
+# *.db
+
+# # Misc
+# .DS_Store
+# Thumbs.db
+# *.pem
+# .cache/
+
+
+# Python virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Node dependencies
+node_modules/
+
+# Build directories
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE-specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
