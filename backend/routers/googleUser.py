@@ -14,15 +14,12 @@ from config import collection
 router = APIRouter()
 
 
-
 def user_helper(user) -> dict:
     return {
 
         "id": str(user["_id"]),
         "name": user["name"],
         "email": user["email"],
-
-
         "is_2FA_Enabled": user.get("is_2FA_Enabled"),
         "is_google_user": user.get("is_google_user"),
         "profile_picture": user.get("profile_picture"),
@@ -33,44 +30,71 @@ def user_helper(user) -> dict:
 
 
 
+# async def get_user_by_email(email: str):
+#     user =  collection.find_one({"email": email})
+#     if user:
+#         return user
+#     return None
+
 async def get_user_by_email(email: str):
-    user =  collection.find_one({"email": email})
+    user = collection.find_one({"email": email})  # Add await here
     if user:
-        return user
+        return user_helper(user)  # Convert to consistent format
     return None
 
 
-
+# async def get_user_by_google_id(google_id: str):
+#     user =  collection.find_one({"google_id": google_id})
+#     if user:
+#         return user
+#     return None
 
 async def get_user_by_google_id(google_id: str):
-    user =  collection.find_one({"google_id": google_id})
+    user =  collection.find_one({"google_id": google_id})  # Add await here
     if user:
-        return user
+        return user_helper(user)  # Convert to consistent format
     return None
 
 
+
+# async def create_user(user_data: dict):
+#     user_data["created_at"] = datetime.now()
+
+#     user =  collection.insert_one(user_data)
+
+#     new_user =  collection.find_one({"_id": user.inserted_id})
+#     return user_helper(new_user)
 
 async def create_user(user_data: dict):
     user_data["created_at"] = datetime.now()
-
-    user =  collection.insert_one(user_data)
-
-    new_user =  collection.find_one({"_id": user.inserted_id})
+    user = await collection.insert_one(user_data)  # Add await here
+    new_user = await collection.find_one({"_id": user.inserted_id})  # Add await here
     return user_helper(new_user)
 
 
 
-async def update_user(email: str, data: dict):
-    user =  collection.find_one({"email": email})
+# async def update_user(email: str, data: dict):
+#     user =  collection.find_one({"email": email})
 
+#     if user:
+#         updated_user =  collection.update_one(
+#             {"email": email}, {"$set": data}
+#         )
+
+#         if updated_user:
+#             return True
+        
+#     return False
+
+
+async def update_user(email: str, data: dict):
+    user =  collection.find_one({"email": email})  # Add await here
     if user:
-        updated_user =  collection.update_one(
+        updated_user = collection.update_one(  # Add await here
             {"email": email}, {"$set": data}
         )
-
         if updated_user:
             return True
-        
     return False
 
 
@@ -114,6 +138,8 @@ async def google_authentication(user_data: GoogleAuthRequest = Body(...)):
                     "is_google_user": True
                 }
             )
+            
+            user = await get_user_by_email(user_data.email)
     else:
         
         # Create new user
@@ -135,7 +161,7 @@ async def google_authentication(user_data: GoogleAuthRequest = Body(...)):
 
     # Generate JWT token
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = create_access_token(data={"email": user["email"], "id": str(user["_id"]) }, expires_delta=access_token_expires)
+    access_token = create_access_token(data={"email": user["email"], "id": str(user["id"]) }, expires_delta=access_token_expires)
 
     # Create a single dictionary to hold all response data
     response_data = {
@@ -143,7 +169,7 @@ async def google_authentication(user_data: GoogleAuthRequest = Body(...)):
         "message": "Authentication successful",
         "token": access_token,
         "user": {
-            "id": str(user["_id"]),
+            "id": str(user["id"]),
             "name": user["name"],
             "email": user["email"],
             "is_2FA_Enabled": user.get("is_2FA_Enabled"),
@@ -157,7 +183,7 @@ async def google_authentication(user_data: GoogleAuthRequest = Body(...)):
         "message": "Authentication successful",
         "token": access_token,
         "user": {
-            "id": str(user["_id"]),
+            "id": str(user["id"]),
             "name": user["name"],
             "email": user["email"],
             "is_2FA_Enabled": user.get("is_2FA_Enabled"),

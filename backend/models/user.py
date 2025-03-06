@@ -23,6 +23,10 @@ class UserInfo(BaseModel):
     profile_picture: str 
 
 
+class MasterKeyData(BaseModel):
+    verification_hash: str
+    salt: str
+    iv: str
 
 
 class UserLogin(BaseModel):

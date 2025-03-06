@@ -1,0 +1,28 @@
+User creates master password → setupMasterPassword() function
+
+1. Generate random salt and IV (Initialization Vector)
+2. Derive a cryptographic key from password using PBKDF2
+3. Create verification data by encrypting "PASSVAULT_VERIFICATION"
+4. Store salt, IV, and verification hash:
+   - In localStorage (offline access)
+   - In application state
+   - On server (if logged in)
+5. Store the derived key in memory as masterKey (ArrayBuffer format)
+6. Set isSetup=true and isUnlocked=true
+
+
+
+
+1. User enters master password
+2. verifyMasterPassword() checks if password is correct by:
+   - Deriving key using same method
+   - Decrypting verification data
+   - Checking if result equals "PASSVAULT_VERIFICATION"
+3. If correct, re-derive masterKey and set isUnlocked=true
+
+
+1. lockVault() clears masterKey (sets to null)
+2. Sets isUnlocked=false
+
+
+

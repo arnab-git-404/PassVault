@@ -64,6 +64,8 @@ export default function TwoFactorAuth({ email }) {
 
 
   return (
+<div className="max-w-5xl p-6"> 
+
     <div className="bg-gray-900 text-white p-6 rounded-lg shadow-lg w-96">
       <h2 className="text-2xl font-bold mb-4">Two-Factor Authentication</h2>
 
@@ -115,6 +117,7 @@ export default function TwoFactorAuth({ email }) {
 
 
 
+    </div>
     </div>
   );
 }

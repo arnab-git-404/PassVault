@@ -1,44 +1,54 @@
-import React, { useState } from "react";
-import UserSignIn from "./pages/UserSignIn";
-import UserSignUp from "./pages/UserSignUp";
+import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Navbars from "./components/Navbar";
-import Dashboard from "./pages/Dashboard";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+// Pages
 import LandingPage from "./pages/LandingPage";
-import { ToastContainer, toast } from "react-toastify";
+import UserSignUp from "./pages/UserSignUp";
+import UserSignIn from "./pages/UserSignIn";
+import Dashboard from "./pages/Dashboard";
 import UserForgetPassword from "./pages/UserForgetPassword";
+import PlaceholderPage from "./pages/PlaceholderPage";
+import Settings from "./pages/Settings";
+
+// Components
 import ProtectedRoute from "./components/ProtectedRoute";
-import { useGlobalContext } from "./context/context";
-import { Navigate } from "react-router-dom";
 
 function App() {
   return (
     <>
       <Router>
         <ToastContainer theme="dark" />
-        {/* <Navbars />  */}
-
+        
         <Routes>
+          {/* Public Routes */}
           <Route exact path="/" element={<LandingPage />} />
-
           <Route path="/signup" element={<UserSignUp />} />
-
           <Route path="/signin" element={<UserSignIn />} />
-
+          <Route path="/forget-password" element={<UserForgetPassword />} />
+          
+          {/* Protected Routes */}
           <Route
             path="/dashboard"
             element={
               <ProtectedRoute>
-                <Dashboard /> {/* This route is protected */}
+                <Dashboard />
               </ProtectedRoute>
             }
           />
-
+          
           <Route
-            exact
-            path="/forget-password"
-            element={<UserForgetPassword />}
+            path="/settings"
+            element={
+              <ProtectedRoute>
+                <Settings />
+              </ProtectedRoute>
+            }
           />
+          
+          {/* Dynamic Page Routes */}
+          <Route path="/:pageType" element={<PlaceholderPage />} />
         </Routes>
       </Router>
     </>

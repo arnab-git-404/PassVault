@@ -12,6 +12,8 @@ export default function Profile() {
 
 
   return (
+
+    <div className="w-full max-w-xl p-6">  
     <div className="bg-gray-900 text-white p-6 rounded-lg shadow-lg w-96">
       <h2 className="text-2xl font-bold mb-4">User Profile</h2>
       
@@ -45,6 +47,7 @@ export default function Profile() {
           Logout
         </button>
       </div>
+    </div>
     </div>
   );
 }

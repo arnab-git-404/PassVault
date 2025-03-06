@@ -1,10 +1,46 @@
-from fastapi import APIRouter, HTTPException
+
+from fastapi import APIRouter, HTTPException, Depends
 from fastapi.responses import JSONResponse
 from models.password import SavedPassword, ShowAllPasswords, PasswordItem , DeletePasswordRequest,UpdatePasswordRequest
 from config import collection_password
 from bson.objectid import ObjectId
+from jose import JWTError, jwt, ExpiredSignatureError
+from fastapi import Header
+
 
 router = APIRouter()
+
+SECRET_KEY = "6006"
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
+
+def get_current_user(authorization: str = Header(None)):
+    if authorization is None:
+        raise HTTPException(status_code=400, detail="Authorization header is missing")
+    
+    try:
+        # Assuming the token starts with "Bearer "
+        token = authorization.split(" ")[1]
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        
+        user_email = payload.get("email")
+        
+        if user_email is None:
+            raise HTTPException(status_code=400, detail="Token does not contain email")
+
+        return user_email
+    
+    except ExpiredSignatureError:
+        raise HTTPException(status_code=401, detail="Token has expired. Please log in again.")
+    
+    except JWTError:
+        raise HTTPException(status_code=404, detail="Not authenticated")
+    
+    except Exception as e:
+        # Catching any other unexpected errors
+        raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
+
+
 
 @router.post("/save-password")
 async def save_password(password_item: PasswordItem):
@@ -32,17 +68,17 @@ async def save_password(password_item: PasswordItem):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.get("/show-passwords/{email}")
-async def show_passwords(email: str):
+@router.get("/show-passwords")
+async def show_passwords(current_user: str = Depends(get_current_user)):
 
-    existing_user = collection_password.find_one({"email": email})
+    existing_user = collection_password.find_one({"email": current_user})
 
     if not existing_user:
         raise HTTPException(status_code=404, detail="User not found")
 
 
     try:
-        passwords = collection_password.find({"email": email})
+        passwords = collection_password.find({"email": current_user})
 
         password_list = []
         for password in passwords:
