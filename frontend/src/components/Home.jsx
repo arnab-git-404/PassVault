@@ -2,20 +2,7 @@
 // import React from "react";
 // import { FaShieldAlt, FaKey, FaLock, FaDatabase, FaMobileAlt } from "react-icons/fa";
 // import VaultStatus from './VaultStatus'
-// export default function Home(){
 
-// export default function Home({ isSetup, isUnlocked, onSetupClick }) {
-//   const features = [
-//     {
-//       icon: <FaKey className="text-blue-500 text-3xl" />,
-//       title: "Master Password",
-//       description: "Set up once and unlock your vault whenever needed",
-//       status: isSetup ? "Configured" : "Not Configured",
-//       statusColor: isSetup ? "text-green-500" : "text-red-500"
-//     },
-//     {
-//       icon: <FaLock className="text-purple-500 text-3xl" />,
-//       title: "Password Generator",
 //       description: "Create strong, unique passwords for all your accounts",
 //     },
 //     {
