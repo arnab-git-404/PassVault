@@ -883,17 +883,7 @@ export default function Home({ isSetup, isUnlocked, onSetupClick }) {
           How PassVault Works
         </h2>
 
-        <div className="hidden lg:block absolute top-0 left-0 w-full h-1 bg-gray-700">
-          <div
-            className={`h-full bg-blue-500 transition-all duration-1000 ease-in-out`}
-            style={{
-              width: isSetup ? (isUnlocked ? "100%" : "50%") : "25%",
-              background: isUnlocked
-                ? "linear-gradient(90deg, #10B981, #3B82F6)"
-                : "linear-gradient(90deg, #3B82F6, #8B5CF6)",
-            }}
-          ></div>
-        </div>
+        <div className=
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-3">
           {steps.map((step, index) => {
@@ -903,19 +893,7 @@ export default function Home({ isSetup, isUnlocked, onSetupClick }) {
             // Animation for current step
             if (animationStep === index) {
               activeClass =
-                "ring-2 ring-offset-2 ring-offset-gray-900 ring-blue-500 transform scale-105";
-            }
-
-            switch (step.status) {
-              case "complete":
-                statusColors = "bg-green-900 border-green-500 text-green-300";
-                break;
-              case "pending":
-                statusColors =
-                  "bg-yellow-900 border-yellow-500 text-yellow-300";
-                break;
-              default:
-                statusColors = "bg-gray-800 border-gray-700 text-gray-500";
+             order-gray-700 text-gray-500";
             }
 
             return (
