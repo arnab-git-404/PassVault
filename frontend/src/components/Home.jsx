@@ -2,21 +2,6 @@
 
 
 
-//                       <span className="bg-gray-900 px-3 py-1 rounded-full text-xs mr-2">
-//                         {isUnlocked ? "Str0ngP@ssw0rd!" : "••••••••••••••"}
-//                       </span>
-//                       <FaEye className="text-blue-500" />
-//                     </div>
-//                   </div>
-//                   <div className="bg-gray-800 p-3 flex justify-between">
-//                     <div>Twitter</div>
-//                     <div className="flex items-center">
-//                       <span className="bg-gray-900 px-3 py-1 rounded-full text-xs mr-2">
-//                         {isUnlocked ? "Tw33t_S@fe_2023" : "•••••••••••••••"}
-//                       </span>
-//                       <FaEye className="text-blue-500" />
-//                     </div>
-//                   </div>
 //                 </div>
 //               </div>
 //             </div>
