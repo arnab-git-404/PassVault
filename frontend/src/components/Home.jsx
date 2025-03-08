@@ -633,52 +633,12 @@
 //                             {item.password}
 //                           </span>
 
-//                           <span
-//                             className={`transition-all duration-500 ${
-//                               !(isUnlocked && showDecrypted) ? 'opacity-100' : 'opacity-0'
-//                             } absolute`}
-//                           >
-//                             {"•".repeat(item.password.length)}
-//                           </span>
-//                         </div>
-//                         <FaEye
-//                           className={`${isUnlocked ? 'text-blue-500' : 'text-gray-600'}
-//                             ${(isUnlocked && showDecrypted) ? 'opacity-100' : 'opacity-70'}`}
-//                         />
-//                       </div>
-//                     </div>
-//                   ))}
-//                 </div>
-//               </div>
-
-//               {/* Status message based on current lock state */}
-//               <div
-//                 className={`mt-4 text-center text-sm ${
-//                   isUnlocked ? 'text-green-500' : 'text-red-400'
 //                 } animate-pulse`}
 //               >
 //                 {isUnlocked ?
 //                   "Vault is unlocked - passwords are being decrypted" :
 //                   "Vault is locked - passwords are encrypted"}
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-
-//       {/* FAQ or Additional Info */}
-//       <div className="bg-gray-900 rounded-xl p-6">
-//         <h3 className="text-xl font-bold mb-4">Security Notes</h3>
-//         <ul className="space-y-3 list-disc pl-5">
-//           <li className="transition-all hover:translate-x-1">
-//             Your master password is <span className="text-red-400 font-bold">never stored</span> on our servers
-//           </li>
-//           <li className="transition-all hover:translate-x-1">
-//             All encryption/decryption happens <span className="text-green-400 font-bold">locally</span> on your device
-//           </li>
-//           <li className="transition-all hover:translate-x-1">
-//             We use <span className="text-blue-400 font-bold">AES-256</span> encryption, the industry standard
-//           </li>
+//     las
 //           <li className="transition-all hover:translate-x-1">
 //             Enable 2FA for additional account security
 //           </li>
