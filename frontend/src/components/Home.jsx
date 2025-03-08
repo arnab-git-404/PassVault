@@ -880,20 +880,7 @@ export default function Home({ isSetup, isUnlocked, onSetupClick }) {
       {/* Visual Process Flow with Animation */}
       {/* <div className="bg-gray-900 rounded-xl p-6 mb-10 relative overflow-hidden">
         <h2 className="text-2xl font-bold mb-8 text-center">
-          How PassVault Works
-        </h2>
-
-        <div className=
-
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-3">
-          {steps.map((step, index) => {
-            let statusColors;
-            let activeClass = "";
-
-            // Animation for current step
-            if (animationStep === index) {
-              activeClass =
-             order-gray-700 text-gray-500";
+t-gray-500";
             }
 
             return (
