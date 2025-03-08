@@ -481,23 +481,6 @@
 //         </div>
 
 
-//                 </div>
-
-//                 <FaArrowRight className={`text-gray-500 ${animationStep === 0 ? 'text-blue-500' : ''} transition-colors duration-300`} />
-
-//                 <div className={`relative text-center p-3 bg-gray-800 border-2 ${animationStep === 1 ? 'border-blue-500 animate-pulse' : 'border-transparent'} rounded-lg w-1/4 z-10 transition-all duration-300`}>
-//                   <FaFingerprint className={`text-blue-500 mx-auto ${animationStep === 1 ? 'animate-spin' : ''}`} />
-//                   <div className="text-xs mt-2">Encryption Key</div>
-//                 </div>
-
-//                 <FaArrowRight className={`text-gray-500 ${animationStep === 1 ? 'text-blue-500' : ''} transition-colors duration-300`} />
-
-//                 <div className={`relative text-center p-3 bg-gray-800 border-2 ${animationStep === 2 ? 'border-blue-500 animate-pulse' : 'border-transparent'} rounded-lg w-1/4 z-10 transition-all duration-300`}>
-//                   <FaLock
-//                     className={`${isUnlocked ? 'text-green-500' : 'text-red-500'} mx-auto ${animationStep === 2 ? 'animate-bounce' : ''}`}
-//                   />
-//                   <div className="text-xs mt-2">Secure Vault</div>
-//                 </div>
 //               </div>
 
 //               {/* Example password storage with visibility animation */}
