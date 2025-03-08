@@ -320,7 +320,7 @@ function Settings() {
         <div className="flex flex-col sm:flex-row justify-between items-center mb-8">
           <button
             onClick={() => navigate("/dashboard")}
-            className="flex items-center text-white bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg transition-all duration-200 shadow-lg hover:shadow-indigo-500/30 mb-4 sm:mb-0 transform hover:scale-105"
+            className=" rounded-full flex items-center text-white bg-indigo-600 hover:bg-indigo-700 px-4 py-2 hover:cursor-pointer transition-all duration-200 shadow-lg hover:shadow-indigo-500/30 mb-4 sm:mb-0 transform hover:scale-105"
           >
             <FaArrowLeft className="mr-2" />
             <span>Back to Dashboard</span>
@@ -375,7 +375,7 @@ function Settings() {
                     type="button"
                     onClick={sendResetOTP}
                     disabled={sendingOTP}
-                    className="px-4 py-3 h-[46px] border border-gray-300 bg-gray-50 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors"
+                    className="hover:cursor-pointer px-4 py-3 h-[46px] border border-gray-300 bg-gray-50 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors"
                   >
                     {sendingOTP ? (
                       <>
@@ -391,7 +391,7 @@ function Settings() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-3 px-4 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 shadow-md hover:shadow-lg"
+                  className=" hover:cursor-pointer w-full py-3 px-4 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 shadow-md hover:shadow-lg"
                 >
                   {loading ? (
                     <>
@@ -449,7 +449,7 @@ function Settings() {
                     type="button"
                     onClick={sendMasterKeyResetOTP}
                     disabled={sendingMasterKeyOtp}
-                    className="px-4 py-3 h-[46px] border border-gray-300 bg-gray-50 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors"
+                    className="hover:cursor-pointer px-4 py-3 h-[46px] border border-gray-300 bg-gray-50 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors"
                   >
                     {sendingMasterKeyOtp ? (
                       <>
@@ -481,7 +481,7 @@ function Settings() {
                 <button
                   type="submit"
                   disabled={resetMasterKeyLoading}
-                  className="w-full py-3 px-4 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 shadow-md hover:shadow-lg"
+                  className="hover:cursor-pointer w-full py-3 px-4 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 shadow-md hover:shadow-lg"
                 >
                   {resetMasterKeyLoading ? (
                     <>
@@ -516,7 +516,7 @@ function Settings() {
 
               <button
                 onClick={() => confirmAction("delete_account")}
-                className="w-full py-3 px-4 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 shadow-md hover:shadow-lg"
+                className="hover:cursor-pointer w-full py-3 px-4 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 shadow-md hover:shadow-lg"
               >
                 Delete My Account
               </button>

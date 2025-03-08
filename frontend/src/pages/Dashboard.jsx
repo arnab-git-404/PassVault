@@ -1435,6 +1435,7 @@ import {
   FaShieldAlt,
   FaSignOutAlt,
   FaCog,
+  FaWrench
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -1714,8 +1715,8 @@ export default function Dashboard() {
               },
               {
                 name: "Settings",
-                icon: FaCog,
-                color: "text-gray-400",
+                icon: FaWrench,
+                color: "text-silver-400",
                 label: "Settings",
               },
             ].map(({ name, icon: Icon, color, label }) => (
@@ -1738,7 +1739,7 @@ export default function Dashboard() {
 
             <li className="mt-8">
               <button
-                className="w-full flex items-center space-x-3 p-3 rounded-lg text-red-400 hover:bg-red-900 hover:bg-opacity-30 transition-colors"
+                className="w-full flex items-center space-x-3 p-3 rounded-lg hover:cursor-pointer hover:bg-red-900 hover:bg-opacity-30 transition-colors"
                 onClick={() => handleNavigation("LogOut")}
               >
                 <FaSignOutAlt className="text-red-400" />
