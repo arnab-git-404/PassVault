@@ -877,15 +877,6 @@ export default function Home({ isSetup, isUnlocked, onSetupClick }) {
         </div>
       </div>
 
-      {/* Visual Process Flow with Animation */}
-      {/* <div className="bg-gray-900 rounded-xl p-6 mb-10 relative overflow-hidden">
-        <h2 className="text-2xl font-bold mb-8 text-center">
-t-gray-500";
-            }
-
-            return (
-              
-      </div> */}
 
     {/* Visual Process Flow with Animation - IMPROVED */}
 <div className="bg-gray-900 rounded-xl p-6 mb-10 relative overflow-hidden">
