@@ -450,6 +450,47 @@ async def verify_2fa(user: VerifyTwoFactorAuth):
             "message": f"Failed to verify 2FA: {str(e)}"
         })
 
+
+
+
+@router.post('/reset-2fa')
+async def enable_2fa( userData:dict, user_email: str = Depends(get_current_user)):
+    try:
+        otp_from_redis = r.get(user_email)
+
+        existing_user = collection.find_one({"email": user_email})
+
+        if not existing_user:
+            return JSONResponse(content={
+                "status_code": 404, 
+                "message": "User not found"
+            })
+
+        # Reset 2FA 
+        if( otp_from_redis == userData.get('otp')):
+
+            secret = ''
+            existing_user["_2fa_secret"] = secret
+            existing_user["is_2FA_Enabled"] = False
+            collection.update_one({"email": user_email}, {"$set": existing_user})
+            r.delete(user_email)
+
+            return JSONResponse(content={
+                "status_code": 200,
+                "message": "2FA Reset Successfully"
+            })
+        else:
+             return JSONResponse(content={
+                "status_code": 400,
+                "message": "Failed To reset! Resend The OTP"
+            })
+    except Exception as e:
+        return JSONResponse(content={
+            "status_code": 500, 
+            "message": f"Failed to reset 2FA: {str(e)}"
+        })
+
+
 @router.post('/reset-password')
 async def reset_password(user: ResetPassword):
     try:
@@ -496,6 +537,7 @@ async def reset_password(user: ResetPassword):
             "message": f"Password reset failed: {str(e)}"
         })
 
+
 @router.post('/set-masterKeyHash')
 async def setup_master_key(
     data: MasterKeyData, 
@@ -536,6 +578,7 @@ async def setup_master_key(
             "status_code": 500, 
             "message": f"Failed to setup master key: {str(e)}"
         })
+
 
 @router.get('/get-masterKeyHash')
 async def get_master_key_verification_hash(
@@ -584,6 +627,7 @@ async def get_master_key_verification_hash(
             "status_code": 500, 
             "message": f"Failed to get master key data: {str(e)}"
         })
+
 
 
 

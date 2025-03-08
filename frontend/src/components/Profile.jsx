@@ -41,7 +41,7 @@ export default function Profile() {
           
         </button>
         <button
-          className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded"
+          className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded hover:cursor-pointer "
           onClick={() => logoutUser()}
         >
           Logout

@@ -16,7 +16,7 @@ import { useGlobalContext } from "../context/context";
 
 function Settings() {
   const navigate = useNavigate();
-  const { userLoggedIn, user, logoutUser , fetchUser } = useGlobalContext();
+  const { userLoggedIn, user, logoutUser, fetchUser } = useGlobalContext();
   const [loading, setLoading] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [dialogAction, setDialogAction] = useState("");
@@ -29,18 +29,17 @@ function Settings() {
   const [showMasterKeyConfirm, setShowMasterKeyConfirm] = useState(false);
 
   // Password reset states
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
-  const [showNewPassword, setShowNewPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  // const [currentPassword, setCurrentPassword] = useState("");
+  // const [newPassword, setNewPassword] = useState("");
+  // const [confirmPassword, setConfirmPassword] = useState("");
+  // const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  // const [showNewPassword, setShowNewPassword] = useState(false);
+  // const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   // 2FA states
   const [otpEmail, setOtpEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [sendingOTP, setSendingOTP] = useState(false);
-
   const serverURL = import.meta.env.VITE_APP_SERVER_URL;
 
   // Redirect if not logged in
@@ -49,20 +48,65 @@ function Settings() {
       navigate("/signin");
     } else if (user && user.email) {
       setOtpEmail(user.email);
-      
+      fetchUser();
     }
-  }, [userLoggedIn, navigate, user]);
+  }, [userLoggedIn]);
+
+  console.log(user);
 
 
-  console.log(user)
+  const isTokenValid = async () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      toast.error("Session expired. Please login again.");
+      logoutUser();
+      navigate("/signin");
+      return false;
+    }
 
 
+    try {
+      const res = await fetch(`${serverURL}/api/user/user-info`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-  
-  
-  
+      if (res.status === 401) {
+        logoutUser();
+        localStorage.clear();
+        localStorage.removeItem("token");
+        navigate("/signin");
+        toast.error("Session expired. Please login again");
+        return;
+      }
+    } catch (error) {
+      console.error("Unable To Fetch User Data For Dashboard: ", error);
+      toast.error("Something Went Wrong. Please Try again");
+    }
+
+    return true;
+  };
+
+    // Periodic user data refresh and initial fetch
+    useEffect(() => {
+      fetchUser();
+      isTokenValid();
+      const intervalId = setInterval(fetchUser, 1000 * 60 * 2);
+      return () => clearInterval(intervalId);
+    }, []);
+
+
   const sendResetOTP = async (e) => {
     e.preventDefault();
+
+    if(!user.is_2FA_Enabled){
+      toast.error("2FA is not enabled for this account");
+      return;
+    }
 
     if (!otpEmail) {
       toast.error("Email is required");
@@ -87,11 +131,13 @@ function Settings() {
       });
 
       const data = await res.json();
+      console.log(data);
 
       if (data.status_code === 200) {
-        toast.success(data.message || "OTP sent successfully");
+        toast.success("OTP sent successfully!");
       } else {
-        toast.error(data.message || "Failed to send OTP");
+        toast.error("Failed to send OTP, please try again.");
+        console.log("Failed TO Send OTP: ", data.message);
       }
     } catch (error) {
       console.error("Error sending OTP:", error);
@@ -120,7 +166,6 @@ function Settings() {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          email: otpEmail,
           otp,
         }),
       });
@@ -273,16 +318,14 @@ function Settings() {
   };
 
   return (
-
     <div className="bg-gray-900 min-h-screen py-6">
       <div className="max-w-4xl mx-auto px-4">
         {/* Add back button here */}
 
-
         <div className="  flex justify-start mb-8">
           <button
             onClick={() => navigate("/dashboard")}
-            className=" hover:cursor-pointer group flex items-center space-x-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-lg transition-all duration-200 shadow-lg hover:shadow-indigo-500/50 transform hover:-translate-y-0.5"
+            className=" rounded-full hover:cursor-pointer group flex items-center space-x-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5  transition-all duration-200 shadow-lg hover:shadow-indigo-500/50 transform hover:-translate-y-0.5"
           >
             <div className=" bg-opacity-20 rounded-full p-1.5 mr-1 group-hover:bg-opacity-30 transition-all">
               <FaArrowLeft className="text-xl" />
@@ -363,6 +406,8 @@ function Settings() {
           </form>
         </div>
 
+
+
         {/* Master Key Reset */}
         <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
           <h2 className="text-2xl font-semibold text-gray-800 mb-2 flex items-center">
@@ -438,7 +483,7 @@ function Settings() {
             <button
               type="submit"
               disabled={resetMasterKeyLoading}
-              className="w-full py-2 px-4 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+              className=" hover:cursor-pointer w-full py-2 px-4 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
             >
               {resetMasterKeyLoading ? (
                 <FaSpinner className="inline mr-2 animate-spin" />
@@ -488,13 +533,13 @@ function Settings() {
             <div className="flex justify-end gap-3">
               <button
                 onClick={() => setShowMasterKeyConfirm(false)}
-                className="px-4 py-2 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-100"
+                className="hover:cursor-pointer px-4 py-2 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-100"
               >
                 Cancel
               </button>
               <button
                 onClick={confirmMasterKeyReset}
-                className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
+                className="hover:cursor-pointer px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
               >
                 Confirm Reset
               </button>
@@ -516,13 +561,13 @@ function Settings() {
             <div className="flex justify-end gap-3">
               <button
                 onClick={() => setShowConfirmDialog(false)}
-                className="px-4 py-2 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-100"
+                className="hover:cursor-pointer px-4 py-2 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-100"
               >
                 Cancel
               </button>
               <button
                 onClick={handleConfirm}
-                className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
+                className=" hover:cursor-pointer px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
               >
                 Confirm
               </button>

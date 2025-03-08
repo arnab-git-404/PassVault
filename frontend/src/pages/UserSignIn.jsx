@@ -352,6 +352,7 @@ function UserSignIn() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const { loginUser, userLoggedIn, setMasterPassword } = useGlobalContext();
+  const [gAuthCode, setgAuthCode] = useState("");
 
   const serverURL = import.meta.env.VITE_APP_SERVER_URL;
 
@@ -442,6 +443,11 @@ function UserSignIn() {
       return;
     }
 
+    if(!gAuthCode){
+      toast.error("2FA Code is required");
+      return;
+    }
+
     try {
       const res = await fetch(`${serverURL}/api/user/signin`, {
         method: "POST",
@@ -515,15 +521,14 @@ function UserSignIn() {
                 />
               </div>
 
-              <div className="mb-3 relative ">
-                <div>
-                  <label
-                    htmlFor="password"
-                    className="block text-lg font-medium text-gray-700"
-                  >
-                    Password
-                  </label>
-
+<div className="mb-3 relative">
+                <label
+                  htmlFor="password"
+                  className="block text-lg font-medium text-gray-700"
+                >
+                  Password
+                </label>
+                <div className="relative">
                   <input
                     type={showPassword ? "text" : "password"}
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -533,15 +538,37 @@ function UserSignIn() {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Enter Password"
                   />
-
                   <div
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer mt-6 text-2xl "
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-2xl"
                     onClick={togglePasswordVisibility}
                   >
                     {showPassword ? <FaEye /> : <FaEyeSlash />}
                   </div>
                 </div>
               </div>
+
+              <div className="mb-3">
+                <label
+                  htmlFor="gAuthCode"
+                  className="block text-lg font-medium text-gray-700"
+                >
+                  2FA Authenticator Code
+                </label>
+                <input
+                  type="number"
+                  className="mt-1 block w-72  px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  id="gAuthCode"
+                  name="gAuthCode"
+                  value={gAuthCode}
+                  onChange={(e) => setgAuthCode(e.target.value)}
+                  placeholder="Check Your Authenticator App For OTP"
+                />
+              </div>
+
+
+
+
+
 
               <div className="text-right py-3">
                 <Link

@@ -16,7 +16,6 @@
 
 // // import MasterPasswordSetup from "../utility/MasterPasswordSetup";
 
-
 // export default function Dashboard() {
 //   const navigate = useNavigate();
 //   const modalRef = useRef(null);
@@ -31,7 +30,6 @@
 
 //   const token = localStorage.getItem("token");
 
-
 //   // Add event handler for outside clicks
 //   useEffect(() => {
 //     function handleClickOutside(event) {
@@ -44,13 +42,12 @@
 //     if (isModalOpen) {
 //       document.addEventListener("mousedown", handleClickOutside);
 //     }
-    
+
 //     // Clean up the event listener
 //     return () => {
 //       document.removeEventListener("mousedown", handleClickOutside);
 //     };
 //   }, [isModalOpen]);
-
 
 //   const fetchUser = async () => {
 
@@ -59,7 +56,6 @@
 //       navigate("/signin");
 //       return;
 //     }
-
 
 //     // console.log(userLoggedIn);
 
@@ -85,7 +81,6 @@
 //       loginUser(data.user);
 //       console.log("User Data For Dashboard", user);
 
-
 //     } catch (error) {
 //       console.log("Unable To Fetch User Data For Dashboard: ", error);
 //       toast.error("Something Went Wrong. Please Try again");
@@ -109,9 +104,6 @@
 //     return () => clearInterval(intervalId); // Cleanup on component unmount
 //   }, []);
 
-
-
-
 //   // Function to render content based on selectedOption
 //   const renderContent = () => {
 //     switch (selectedOption) {
@@ -129,7 +121,7 @@
 //         navigate("/signin");
 //         toast.success("Logged Out Successfully");
 //         return null;
-      
+
 //       // case "MasterPasswordSetup":
 //       //   return <MasterPasswordSetup />;
 
@@ -179,14 +171,12 @@
 //               Show Passwords
 //             </li>
 
-
 //             {/* <li
 //               className="hover:bg-gray-700 p-2 rounded cursor-pointer"
 //               onClick={() => setSelectedOption("MasterPasswordSetup")}
 //             >
 //               Master Key
 //             </li> */}
-
 
 //             <li
 //               className="hover:bg-gray-700 p-2 rounded cursor-pointer"
@@ -236,7 +226,6 @@
 //         />
 // </div>
 
-
 //         {/* Content Rendering Based on Selection */}
 //         <div className="flex-1 flex items-center justify-center">
 //           {renderContent()}
@@ -246,8 +235,6 @@
 //   );
 
 // }
-
-
 
 // @ -1,142 +1,66 @@
 // import { use, useState, useRef, useEffect, useContext } from "react";
@@ -288,7 +275,6 @@
 
 // // import MasterPasswordSetup from "../utility/MasterPasswordSetup";
 
-
 // export default function Dashboard() {
 //   const navigate = useNavigate();
 //   const modalRef = useRef(null);
@@ -306,7 +292,6 @@
 //   const serverURL = "http://127.0.0.1:8000";
 
 //   const token = localStorage.getItem("token");
-
 
 //   // Add event handler for outside clicks
 //   useEffect(() => {
@@ -326,7 +311,6 @@
 //       document.addEventListener("mousedown", handleClickOutside);
 //     }
 
-    
 //     // Clean up the event listener
 //     return () => {
 //       document.removeEventListener("mousedown", handleClickOutside);
@@ -351,7 +335,6 @@
 //     };
 //   }, [isSidebarOpen]);
 
-  
 //   // Add event handler for outside clicks to close sidebar on mobile
 //   useEffect(() => {
 //     function handleClickOutside(event) {
@@ -404,7 +387,6 @@
 //       return;
 //     }
 
-
 //     // console.log(userLoggedIn);
 
 //     try {
@@ -422,7 +404,6 @@
 //       const data = await res.json();
 //       loginUser(data.user);
 //       console.log("User Data For Dashboard", user);
-
 
 //     } catch (error) {
 //       console.log("Unable To Fetch User Data For Dashboard: ", error);
@@ -532,7 +513,7 @@
 //           // }}
 //           />
 //         );
-      
+
 //       // case "MasterPasswordSetup":
 //       //   return <MasterPasswordSetup />;
 
@@ -594,7 +575,7 @@
 //           </button>
 //         </div>
 
-//         {/* 
+//         {/*
 //         <div className="flex justify-between p-4">
 //           <button
 //             className="p-2 hover:cursor-pointer bg-gray-700 rounded"
@@ -609,7 +590,6 @@
 //         {/* <div className="p-4">
 //         <div className="p-4">
 //           <ul className="space-y-4">
-
 
 //           <li
 //               className="hover:bg-gray-700 p-2 rounded cursor-pointer"
@@ -647,7 +627,6 @@
 //               Master Key
 //             </li>
 //             </li> */}
-
 
 //             <li
 //               className="hover:bg-gray-700 p-2 rounded cursor-pointer"
@@ -753,7 +732,6 @@
 //               </button>
 //             </li>
 
-            
 //             <li>
 //               <button
 //                 className={`w-full flex items-center space-x-3 p-3 rounded-lg transition-colors ${
@@ -768,15 +746,6 @@
 //               </button>
 //             </li>
 
-
-
-
-
-
-
-
-
-
 //             <li className="mt-8">
 //               <button
 //                 className="w-full flex items-center space-x-3 p-3 rounded-lg text-red-400 hover:bg-red-900 hover:bg-opacity-30 transition-colors"
@@ -786,7 +755,6 @@
 //                 <span>Logout</span>
 //               </button>
 //             </li>
-
 
 //           </ul>
 //         </div>
@@ -859,7 +827,7 @@
 //     if (isUnlocked) {
 //       lockVault(); // This calls the context function
 //       // No need for additional toast since lockVault already shows one
-      
+
 //       // Force a re-render of components that depend on the vault status
 //       setSelectedOption(prev => {
 //         // If we're on the "GeneratePassword" or "ShowAllPassword" page,
@@ -881,8 +849,6 @@
 // >
 //   {isUnlocked ? "Lock Vault" : "Unlock Vault"}
 // </button>
-
-
 
 //     <FaUserCircle
 //       className="text-white text-4xl cursor-pointer"
@@ -1456,21 +1422,19 @@
 
 // // }
 
-
-
 import React, { useState, useRef, useEffect } from "react";
-import { 
-  FaUserCircle, 
-  FaLock, 
-  FaBars, 
-  FaTimes, 
-  FaHome, 
-  FaUser, 
-  FaKey, 
-  FaListAlt, 
-  FaShieldAlt, 
-  FaSignOutAlt, 
-  FaCog 
+import {
+  FaUserCircle,
+  FaLock,
+  FaBars,
+  FaTimes,
+  FaHome,
+  FaUser,
+  FaKey,
+  FaListAlt,
+  FaShieldAlt,
+  FaSignOutAlt,
+  FaCog,
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -1512,15 +1476,15 @@ export default function Dashboard() {
       }
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, [isSidebarOpen]);
 
-  // Close sidebar on outside click for mobile
+  // Close sidebar on outside click for mobile & Desktop
   useEffect(() => {
     function handleClickOutside(event) {
       if (
-        isMobile &&
+        
         isSidebarOpen &&
         sidebarRef.current &&
         !sidebarRef.current.contains(event.target) &&
@@ -1530,12 +1494,14 @@ export default function Dashboard() {
       }
     }
 
-    if (isMobile && isSidebarOpen) {
+    if (isSidebarOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     }
 
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [isMobile, isSidebarOpen]);
+  }, [isSidebarOpen]);
+
+
 
   // Close modal on outside click
   useEffect(() => {
@@ -1598,7 +1564,11 @@ export default function Dashboard() {
 
   // Handle vault status changes
   useEffect(() => {
-    if (!isUnlocked && (selectedOption === "GeneratePassword" || selectedOption === "ShowAllPassword")) {
+    if (
+      !isUnlocked &&
+      (selectedOption === "GeneratePassword" ||
+        selectedOption === "ShowAllPassword")
+    ) {
       setSelectedOption("Home");
     }
   }, [isUnlocked]);
@@ -1615,7 +1585,8 @@ export default function Dashboard() {
   const renderContent = () => {
     if (
       (!isSetup || !isUnlocked) &&
-      (selectedOption === "GeneratePassword" || selectedOption === "ShowAllPassword")
+      (selectedOption === "GeneratePassword" ||
+        selectedOption === "ShowAllPassword")
     ) {
       return (
         <div className="w-full max-w-md">
@@ -1657,8 +1628,12 @@ export default function Dashboard() {
         navigate("/signin");
         toast.success("Logged Out Successfully");
         return null;
+
       case "MasterPasswordSetup":
         return <MasterPasswordSetup />;
+      case "Settings":
+        navigate("/settings");
+        return null;
       case "Home":
       default:
         return (
@@ -1711,23 +1686,51 @@ export default function Dashboard() {
         <div className="p-4">
           <ul className="space-y-2">
             {[
-              { name: "Home", icon: FaHome },
-              { name: "Profile", icon: FaUser },
-              { name: "GeneratePassword", icon: FaKey, label: "Generate Password" },
-              { name: "ShowAllPassword", icon: FaListAlt, label: "Show Passwords" },
-              { name: "MasterPasswordSetup", icon: FaCog, label: "Master Key" },
-              { name: "2FA", icon: FaShieldAlt, label: "Two-Factor Authentication" }
-            ].map(({ name, icon: Icon, label }) => (
+              { name: "Home", icon: FaHome, color: "text-blue-400" },
+              { name: "Profile", icon: FaUser, color: "text-purple-400" },
+              {
+                name: "GeneratePassword",
+                icon: FaKey,
+                color: "text-yellow-400",
+                label: "Generate Password",
+              },
+              {
+                name: "ShowAllPassword",
+                icon: FaListAlt,
+                color: "text-orange-400",
+                label: "Show Passwords",
+              },
+              {
+                name: "MasterPasswordSetup",
+                icon: FaCog,
+                color: "text-red-400",
+                label: "Master Key",
+              },
+              {
+                name: "2FA",
+                icon: FaShieldAlt,
+                color: "text-green-400",
+                label: "2FA Authentication",
+              },
+              {
+                name: "Settings",
+                icon: FaCog,
+                color: "text-gray-400",
+                label: "Settings",
+              },
+            ].map(({ name, icon: Icon, color, label }) => (
               <li key={name}>
                 <button
-                  className={`w-full flex items-center space-x-3 p-3 rounded-lg transition-colors ${
-                    selectedOption === name 
-                      ? "bg-blue-600 text-white" 
+                  className={`hover:cursor-pointer w-full flex items-center space-x-3 p-3 rounded-lg transition-colors ${
+                    selectedOption === name
+                      ? "bg-blue-600 text-white"
                       : "hover:bg-gray-700 text-gray-300"
                   }`}
                   onClick={() => handleNavigation(name)}
                 >
-                  <Icon />
+                  <Icon
+                    className={selectedOption === name ? "text-white" : color}
+                  />
                   <span>{label || name}</span>
                 </button>
               </li>
@@ -1738,7 +1741,7 @@ export default function Dashboard() {
                 className="w-full flex items-center space-x-3 p-3 rounded-lg text-red-400 hover:bg-red-900 hover:bg-opacity-30 transition-colors"
                 onClick={() => handleNavigation("LogOut")}
               >
-                <FaSignOutAlt />
+                <FaSignOutAlt className="text-red-400" />
                 <span>Logout</span>
               </button>
             </li>
@@ -1773,12 +1776,16 @@ export default function Dashboard() {
                   onClick={() => {
                     if (isUnlocked) {
                       lockVault();
-                      setSelectedOption(prev => 
-                        ["GeneratePassword", "ShowAllPassword"].includes(prev) ? "Home" : prev
+                      setSelectedOption((prev) =>
+                        ["GeneratePassword", "ShowAllPassword"].includes(prev)
+                          ? "Home"
+                          : prev
                       );
                     } else {
                       setSelectedOption("Home");
-                      toast.info("Use the 'Unlock Vault' option to access your passwords");
+                      toast.info(
+                        "Use the 'Unlock Vault' option to access your passwords"
+                      );
                     }
                   }}
                   className={`flex items-center space-x-1 px-3 py-1.5 rounded-full transition-colors ${

@@ -332,7 +332,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaGoogle } from "react-icons/fa";
+import { FaGoogle , FaSpinner } from "react-icons/fa";
 import {
   getAuth,
   signInWithPopup,
@@ -367,6 +367,7 @@ function UserSignUp() {
   const [name, setName] = useState("");
   const [otp, setOTP] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [sendingOTP, setSendingOTP] = useState(false);
   const navigate = useNavigate();
 
   const serverURL = import.meta.env.VITE_APP_SERVER_URL;
@@ -531,6 +532,7 @@ function UserSignUp() {
     }
 
     try {
+      setSendingOTP(true);
       const res = await fetch(`${serverURL}/api/user/send-otp`, {
         method: "POST",
         headers: {
@@ -548,10 +550,19 @@ function UserSignUp() {
 
       const data = await res.json();
       console.log(data);
-      toast.success("OTP sent successfully!");
+
+      if(data.status_code === 200) {
+        toast.success("OTP sent successfully!");
+      } else {
+        toast.error("Failed to send OTP, please try again.");
+        console.log("Failed TO Send OTP: ",data.message);
+      }
+
     } catch (error) {
       console.log(error);
       toast.error("Failed to send OTP");
+    } finally {
+      setSendingOTP(false);
     }
   };
 
@@ -626,6 +637,7 @@ function UserSignUp() {
               </div>
 
               <div className="mb-3 flex justify-between">
+                
                 <div>
                   <label
                     htmlFor="otp"
@@ -644,13 +656,35 @@ function UserSignUp() {
                   />
                 </div>
 
-                <button
+
+
+                {/* <button
                   type="button"
                   onClick={sendOTP}
                   className="mt-5 block px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 >
                   Send Code
+                </button> */}
+
+                <button
+                  type="button"
+                  onClick={sendOTP}
+                  disabled={sendingOTP}
+                  className=" hover:cursor-pointer mt-5 block px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                >
+                  {sendingOTP ? (
+                    <>
+                      <FaSpinner className="inline mr-2 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    "Send Code"
+                  )}
+                  
                 </button>
+
+
+
               </div>
               <div className="flex justify-center hover:cursor-pointer">
                 <button

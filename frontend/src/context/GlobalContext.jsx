@@ -278,6 +278,7 @@ export const GlobalProvider = ({ children }) => {
   const [masterPasswordSet, setMasterPasswordSet] = useState(false);
   const [masterSalt, setMasterSalt] = useState(null);
   const [vaultLocked, setVaultLocked] = useState(true);
+  
 
   // Server Configuration
   const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
