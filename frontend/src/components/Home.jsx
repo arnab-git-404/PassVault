@@ -45,45 +45,8 @@
 //               onClick={onSetupClick}
 //               className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold"
 //             >
-//               Set Up Master Password
-//             </button>
-//             <p className="mt-2 text-gray-400 text-sm">
-//               First step: Create your vault with a strong master password
-//             </p>
-//           </div>
-//         )}
-//       </div>
 
-//       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-//         {features.map((feature, index) => (
-//           <div key={index} className="bg-gray-700 p-6 rounded-lg">
-//             <div className="flex items-center mb-4">
-//               {feature.icon}
-//               <h3 className="text-xl font-bold ml-3">{feature.title}</h3>
-//             </div>
-//             <p className="text-gray-300">{feature.description}</p>
-//             {feature.status && (
-//               <p className={`mt-2 font-semibold ${feature.statusColor}`}>
-//                 Status: {feature.status}
-//               </p>
-//             )}
-//           </div>
-//         ))}
-//       </div>
 
-//       <div className="bg-gray-700 p-6 rounded-lg mt-8">
-//         <h3 className="text-xl font-bold mb-4 flex items-center">
-//           <FaShieldAlt className="text-blue-500 mr-2" /> How PassVault Works
-//         </h3>
-//         <ol className="list-decimal pl-6 space-y-3">
-//           <li><strong>Set up your master password</strong> - This creates your encryption key</li>
-//           <li><strong>Generate passwords</strong> - Create strong passwords for your accounts</li>
-//           <li><strong>Store securely</strong> - All passwords are encrypted before storage</li>
-//           <li><strong>Access anywhere</strong> - Unlock your vault with your master password</li>
-//         </ol>
-//         <p className="mt-4 text-gray-300">
-
-//                 text-white px-8 py-4 rounded-lg font-bold text-lg shadow-lg transform hover:scale-105 transition-all"
 //             >
 //               Set Up Your Vault Now
 //             </button>
