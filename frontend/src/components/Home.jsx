@@ -264,26 +264,7 @@
 //         <div className="flex flex-wrap justify-center">
 //           <div className="max-w-lg w-full">
 //             <div className="relative p-4">
-//               {/* Visual representation of encryption process */}
-//               <div className="flex items-center justify-between mb-8">
-//                 <div className="text-center p-3 bg-gray-800 rounded-lg w-1/4">
-//                   <FaKey className="text-yellow-500 mx-auto" />
-//                   <div className="text-xs mt-2">Master Password</div>
-//                 </div>
-//                 <FaArrowRight className="text-gray-500" />
-//                 <div className="text-center p-3 bg-gray-800 rounded-lg w-1/4">
-//                   <FaFingerprint className="text-blue-500 mx-auto" />
-//                   <div className="text-xs mt-2">Encryption Key</div>
-//                 </div>
-//                 <FaArrowRight className="text-gray-500" />
-//                 <div className="text-center p-3 bg-gray-800 rounded-lg w-1/4">
-//                   <FaLock className="text-green-500 mx-auto" />
-//                   <div className="text-xs mt-2">Secure Vault</div>
-//                 </div>
-//               </div>
-
-//               {/* Example password storage */}
-//               <div className="mt-6">
+6">
 //                 <div className="text-center text-sm text-gray-400 mb-3">Example Password Storage</div>
 //                 <div className="border border-gray-700 rounded-lg overflow-hidden">
 //                   <div className="bg-gray-800 p-3 border-b border-gray-700 flex justify-between">
@@ -332,79 +313,7 @@
 //       </div>
 //     </div>
 //   );
-// }
 
-// 3RD Version
-// import React, { useState, useEffect } from "react";
-// import {
-//   FaShieldAlt, FaKey, FaLock, FaDatabase, FaMobileAlt,
-//   FaArrowRight, FaFingerprint, FaEye, FaCheck, FaExclamationTriangle
-// } from "react-icons/fa";
-// import VaultStatus from "./VaultStatus";
-
-// export default function Home({ isSetup, isUnlocked, onSetupClick }) {
-//   // Animation state for security flow
-//   const [animationStep, setAnimationStep] = useState(0);
-//   const [showDecrypted, setShowDecrypted] = useState(false);
-
-//   // Cycle through animation steps
-//   useEffect(() => {
-//     const timer = setInterval(() => {
-//       setAnimationStep(prev => (prev + 1) % 4);
-//     }, 3000);
-
-//     return () => clearInterval(timer);
-//   }, []);
-
-//   // Toggle password visibility periodically if vault is unlocked
-//   useEffect(() => {
-//     if (isUnlocked) {
-//       const visibilityTimer = setInterval(() => {
-//         setShowDecrypted(prev => !prev);
-//       }, 4000);
-
-//       return () => clearInterval(visibilityTimer);
-//     }
-//   }, [isUnlocked]);
-
-//   // Security features cards data
-//   const features = [
-//     {
-//       icon: <FaKey className="text-yellow-500 text-3xl" />,
-//       title: "Master Password",
-//       description: "Single strong password that encrypts all your credentials",
-//       status: isSetup ? "Configured" : "Not Configured",
-//       statusColor: isSetup ? "text-green-500" : "text-red-500"
-//     },
-//     {
-//       icon: <FaLock className="text-purple-500 text-3xl" />,
-//       title: "Password Generator",
-//       description: "Create complex, unique passwords for all your accounts",
-//     },
-//     {
-//       icon: <FaDatabase className="text-blue-500 text-3xl" />,
-//       title: "Secure Storage",
-//       description: "End-to-end encryption keeps your data protected",
-//     },
-/
-//       title: "Unlock Your Vault",
-//       description: "Use your master password to unlock access to your passwords",
-//       icon: <FaLock />,
-//       status: isSetup && isUnlocked ? "complete" : (isSetup ? "pending" : "disabled")
-//     },
-//     {
-//       number: 3,
-//       title: "Generate & Store Passwords",
-//       
-//       <div className="text-center mb-12">
-//         <div className="inline-block p-2 bg-blue-900 bg-opacity-30 rounded-lg mb-4">
-//           <FaShieldAlt className="text-blue-200 text-4xl inline-block animate-pulse" />
-//         </div>
-
-//               background: isUnlocked
-//                 ? 'linear-gradient(90deg, #10B981, #3B82F6)'
-//                 : 'linear-gradient(90deg, #3B82F6, #8B5CF6)'
-//             }}
 //           ></div>
 //         </div>
 
