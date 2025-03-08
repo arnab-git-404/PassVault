@@ -386,24 +386,7 @@
 //       title: "Secure Storage",
 //       description: "End-to-end encryption keeps your data protected",
 //     },
-//     {
-//       icon: <FaMobileAlt className="text-green-500 text-3xl" />,
-//       title: "Two-Factor Authentication",
-//       description: "Extra security layer for your PassVault account",
-//     }
-//   ];
-
-//   // Visual step process data
-//   const steps = [
-//     {
-//       number: 1,
-//       title: "Create Master Password",
-//       description: "Set up a strong master password that will encrypt your vault",
-//       icon: <FaKey />,
-//       status: isSetup ? "complete" : "pending"
-//     },
-//     {
-//       number: 2,
+/
 //       title: "Unlock Your Vault",
 //       description: "Use your master password to unlock access to your passwords",
 //       icon: <FaLock />,
