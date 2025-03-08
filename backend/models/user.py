@@ -35,6 +35,7 @@ class UserLogin(BaseModel):
 
 class SendOTPRequest(BaseModel):
     email: str
+    purpose: str
 
 class VerifyOTP(BaseModel):
     email: str

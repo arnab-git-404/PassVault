@@ -22,6 +22,11 @@ class UserHandler:
         if purpose == "authentication":
             message["Subject"] = "[PassVault - Your Verification Code]"
             body = self._get_verification_template(otp)
+        
+        elif purpose == "master_key_reset":
+            message["Subject"] = "[PassVault - Master Key Reset Code]"
+            body = self._get_master_key_reset_template(otp)
+        
         elif purpose == "reset_password":
             message["Subject"] = "[PassVault - Password Reset Code] "
             body = self._get_reset_template(otp)
@@ -206,7 +211,7 @@ class UserHandler:
                         </div>
                         
                         <div class="expiry">
-                            <span class="expiry-icon">⏱</span> This code will expire in <strong>10 minutes</strong>. Please enter it promptly to complete your verification.
+                            <span class="expiry-icon">⏱</span> This code will expire in <strong>5 minutes</strong>. Please enter it promptly to complete your verification.
                         </div>
                         
                         <div class="warning">
@@ -392,7 +397,7 @@ class UserHandler:
                         </div>
                         
                         <div class="expiry">
-                            <span class="expiry-icon">⏱</span> This code will expire in <strong>10 minutes</strong>. Please enter it promptly to complete your password reset.
+                            <span class="expiry-icon">⏱</span> This code will expire in <strong>5 minutes</strong>. Please enter it promptly to complete your password reset.
                         </div>
                         
                         <div class="warning">
@@ -578,7 +583,7 @@ class UserHandler:
                         </div>
                         
                         <div class="expiry">
-                            <span class="expiry-icon">⏱</span> This code will expire in <strong>10 minutes</strong>. Please enter it promptly to complete your verification.
+                            <span class="expiry-icon">⏱</span> This code will expire in <strong>5 minutes</strong>. Please enter it promptly to complete your verification.
                         </div>
                         
                         <div class="warning">
@@ -588,6 +593,154 @@ class UserHandler:
                         <p>Need help? Our support team is available to assist you with any questions or concerns.</p>
                         
                         <a href="https://passvault.yourdomain.com" class="button">Visit PassVault</a>
+                    </div>
+                    
+                    <div class="footer">
+                        <p>© {datetime.now().year} PassVault. All rights reserved.</p>
+                        <p>This is an automated message, please do not reply to this email.</p>
+                        <div class="social-links">
+                            <a href="#">Privacy Policy</a> | 
+                            <a href="#">Terms of Service</a> | 
+                            <a href="#">Support</a>
+                        </div>
+                    </div>
+                </div>
+            </body>
+        </html>
+        """
+
+    def _get_master_key_reset_template(self, otp):
+        return f"""
+        <html>
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>PassVault - Master Key Reset Request</title>
+                <style>
+                    body {{
+                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                        line-height: 1.6;
+                        color: #333333;
+                        background-color: #f9f9f9;
+                        margin: 0;
+                        padding: 0;
+                    }}
+                    .container {{
+                        max-width: 600px;
+                        margin: 20px auto;
+                        background-color: #ffffff;
+                        border-radius: 8px;
+                        overflow: hidden;
+                        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                    }}
+                    .header {{
+                        background: linear-gradient(135deg, #8e44ad, #3498db);
+                        padding: 30px 20px;
+                        text-align: center;
+                    }}
+                    .logo {{
+                        width: 150px;
+                        height: auto;
+                        margin-bottom: 15px;
+                    }}
+                    .header h1 {{
+                        color: white;
+                        margin: 0;
+                        font-size: 24px;
+                        font-weight: 600;
+                    }}
+                    .content {{
+                        padding: 30px;
+                    }}
+                    h2 {{
+                        color: #8e44ad;
+                        margin-top: 0;
+                        font-size: 22px;
+                        font-weight: 600;
+                    }}
+                    p {{
+                        margin-bottom: 20px;
+                        font-size: 16px;
+                    }}
+                    .code-container {{
+                        background-color: #f5f7fa;
+                        border-radius: 6px;
+                        padding: 20px;
+                        margin: 25px 0;
+                        text-align: center;
+                        border-left: 4px solid #8e44ad;
+                    }}
+                    .verification-code {{
+                        font-size: 32px;
+                        font-weight: bold;
+                        color: #2c3e50;
+                        letter-spacing: 8px;
+                        margin: 0;
+                    }}
+                    .reset-warning {{
+                        background-color: #fef2f2;
+                        border-radius: 4px;
+                        padding: 10px 15px;
+                        margin: 25px 0;
+                        font-size: 14px;
+                        border-left: 4px solid #ef4444;
+                    }}
+                    .reset-warning-icon {{
+                        display: inline-block;
+                        margin-right: 5px;
+                        color: #ef4444;
+                        font-weight: bold;
+                    }}
+                    .footer {{
+                        background-color: #f5f7fa;
+                        padding: 20px;
+                        text-align: center;
+                        border-top: 1px solid #e5e7eb;
+                    }}
+                    .footer p {{
+                        color: #6b7280;
+                        font-size: 13px;
+                        margin: 0;
+                    }}
+                    .social-links a {{
+                        display: inline-block;
+                        margin: 0 8px;
+                        color: #6b7280;
+                        text-decoration: none;
+                    }}
+                    @media only screen and (max-width: 600px) {{
+                        .container {{
+                            width: 100%;
+                            margin: 0;
+                            border-radius: 0;
+                        }}
+                        .content {{
+                            padding: 20px;
+                        }}
+                    }}
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <div class="header">
+                        <img src="https://yourdomain.com/logo.png" alt="PassVault Logo" class="logo" />
+                        <h1>Master Key Reset</h1>
+                    </div>
+                    
+                    <div class="content">
+                        <h2>Your Master Key Reset Code</h2>
+                        <p>Hello,</p>
+                        <p>We received a request to reset your Master Key for PassVault. Please use the verification code below to proceed:</p>
+                        
+                        <div class="code-container">
+                            <div class="verification-code">{otp}</div>
+                        </div>
+                        
+                        <div class="reset-warning">
+                            <span class="reset-warning-icon">⚠️</span> If you did not request this reset, please ignore this email or contact support immediately.
+                        </div>
+                        
+                        <p>For security reasons, this code will expire in <strong>15 minutes</strong>. Please use it promptly.</p>
                     </div>
                     
                     <div class="footer">

@@ -83,7 +83,7 @@ async def send_otp(user: SendOTPRequest):
         res = r.setex(user.email, OTP_EXPIRY_TIME, otp)
         
         # Send email with OTP
-        success = user_handler.send_otp_email(user.email, otp, "verification")
+        success = user_handler.send_otp_email(user.email, otp, user.purpose)
         
         if not success:
             return JSONResponse(content={"status_code": 500, "message": "Failed to send OTP. Please try again."})
@@ -452,7 +452,6 @@ async def verify_2fa(user: VerifyTwoFactorAuth):
 
 
 
-
 @router.post('/reset-2fa')
 async def enable_2fa( userData:dict, user_email: str = Depends(get_current_user)):
     try:
@@ -580,6 +579,7 @@ async def setup_master_key(
         })
 
 
+
 @router.get('/get-masterKeyHash')
 async def get_master_key_verification_hash(
     user_email: str = Depends(get_current_user)
@@ -627,10 +627,6 @@ async def get_master_key_verification_hash(
             "status_code": 500, 
             "message": f"Failed to get master key data: {str(e)}"
         })
-
-
-
-
 
 
 @router.post('/reset-master-key')

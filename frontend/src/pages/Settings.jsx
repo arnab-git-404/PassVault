@@ -296,7 +296,7 @@ function Settings() {
       });
 
       const data = await res.json();
-
+      console.log(data)
       if (data.status_code === 200) {
         toast.success(data.message || "OTP sent successfully");
       } else {
