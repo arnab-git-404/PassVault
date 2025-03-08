@@ -13,23 +13,6 @@
 //                 <div className="text-center text-sm text-gray-400 mb-3">Example Password Storage</div>
 //                 <div className="border border-gray-700 rounded-lg overflow-hidden">
 //                   {passwords.map((item, index) => (
-//                     <div
-//                       key={index}
-//                       className={`bg-gray-800 p-3 ${index < passwords.length - 1 ? 'border-b border-gray-700' : ''} flex justify-between transition-all duration-300`}
-//                     >
-//                       <div>{item.site}</div>
-//                       <div className="flex items-center">
-//                         <div
-//                           className="bg-gray-900 px-3 py-1 rounded-full text-xs mr-2 flex items-center overflow-hidden"
-//                           style={{ width: '130px', justifyContent: 'center' }}
-//                         >
-//                           <span
-//                             className={`transition-all duration-500 ${
-//                               (isUnlocked && showDecrypted) ? 'opacity-100' : 'opacity-0'
-//                             } absolute`}
-//                           >
-//                             {item.password}
-//                           </span>
 
 //                 } animate-pulse`}
 //               >
