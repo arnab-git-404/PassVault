@@ -439,40 +439,7 @@
 //         <div className="inline-block p-2 bg-blue-900 bg-opacity-30 rounded-lg mb-4">
 //           <FaShieldAlt className="text-blue-200 text-4xl inline-block animate-pulse" />
 //         </div>
-//         <h1 className="text-5xl font-bold mb-3 text-white">PassVault</h1>
-//         <p className="text-xl text-gray-300 mb-6">Your secure, encrypted password manager</p>
 
-//         <div className="inline-block mb-8">
-//           <VaultStatus isSetup={isSetup} isUnlocked={isUnlocked} />
-//         </div>
-
-//         {!isSetup && (
-//           <div className="mt-6 animate-pulse">
-//             <button
-//               onClick={onSetupClick}
-//               className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700
-//                 text-white px-8 py-4 rounded-lg font-bold text-lg shadow-lg transform hover:scale-105 transition-all"
-//             >
-//               Set Up Your Vault Now
-//             </button>
-//             <p className="mt-3 text-gray-400">
-//               Everything starts with creating your secure master password
-//             </p>
-//           </div>
-//         )}
-//       </div>
-
-//       {/* Visual Process Flow with Animation */}
-//       <div className="bg-gray-900 rounded-xl p-6 mb-10 relative overflow-hidden">
-//         <h2 className="text-2xl font-bold mb-8 text-center">How PassVault Works</h2>
-
-//         <div className="hidden lg:block absolute top-0 left-0 w-full h-1 bg-gray-700">
-//           <div
-//             className={`h-full bg-blue-500 transition-all duration-1000 ease-in-out`}
-//             style={{
-//               width: isSetup
-//                 ? (isUnlocked ? '100%' : '50%')
-//                 : '25%',
 //               background: isUnlocked
 //                 ? 'linear-gradient(90deg, #10B981, #3B82F6)'
 //                 : 'linear-gradient(90deg, #3B82F6, #8B5CF6)'
