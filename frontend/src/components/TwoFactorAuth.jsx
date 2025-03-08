@@ -40,30 +40,6 @@ export default function TwoFactorAuth({ email }) {
       });
   };
 
-  // Verify 2FA Code
-  // const verify2FA = () => {
-  //   console.log("this is in verify2FA", email, verificationCode);
-  //   axios
-  //     .post(`${serverUrl}/api/user/2fa/verify`, {
-  //       email: email,
-  //       verification_code: verificationCode,
-  //     })
-  //     .then((response) => {
-  //       if (response.data.status_code === 200) {
-  //         console.log("this is in verify2FA", response.data);
-
-  //         setIs2FAEnabled(true);
-  //         setQrCode("");
-  //         // alert("2FA Enabled Successfully!");
-  //         toast.success("2FA Enabled Successfully!");
-  //       } else {
-  //         // alert("Invalid Code. Try Again.");
-  //         toast.error("Invalid Code. Try Again.");
-  //       }
-  //     })
-  //     .catch((error) => console.error("Error verifying 2FA", error));
-  // };
-
     // Verify 2FA Code
     const verify2FA = () => {
       if (!verificationCode.trim()) {
