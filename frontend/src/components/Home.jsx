@@ -897,18 +897,7 @@ export default function Home({ isSetup, isUnlocked, onSetupClick }) {
             }
 
             return (
-              <div
-                key={index}
-                className={`relative rounded-lg p-5 border transition-all duration-500 ${statusColors} ${activeClass}`}
-              >
-                <div className="flex items-center mb-3">
-
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
+              
       </div> */}
 
     {/* Visual Process Flow with Animation - IMPROVED */}
