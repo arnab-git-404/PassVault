@@ -1,25 +1,5 @@
 
 
-
-
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-
-//       {/* FAQ or Additional Info */}
-//       <div className="bg-gray-900 rounded-xl p-6">
-//         <h3 className="text-xl font-bold mb-4">Security Notes</h3>
-//         <ul className="space-y-2 list-disc pl-5">
-//           <li>Your master password is <span className="text-red-400">never stored</span> on our servers</li>
-//           <li>All encryption/decryption happens <span className="text-green-400">locally</span> on your device</li>
-//           <li>We use <span className="text-blue-400">AES-256</span> encryption, the industry standard</li>
-//           <li>Enable 2FA for additional account security</li>
-//         </ul>
-//       </div>
-//     </div>
 //   );
 
 //           ></div>
