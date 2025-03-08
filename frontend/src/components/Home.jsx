@@ -1,23 +1,7 @@
 
 // import React from "react";
 // import { FaShieldAlt, FaKey, FaLock, FaDatabase, FaMobileAlt } from "react-icons/fa";
-// import VaultStatus from './VaultStatus'
 
-//       description: "Create strong, unique passwords for all your accounts",
-//     },
-//     {
-//       icon: <FaDatabase className="text-green-500 text-3xl" />,
-//       title: "Secure Storage",
-//       description: "All passwords are encrypted with AES-256 before storage",
-//     },
-//     {
-//       icon: <FaMobileAlt className="text-yellow-500 text-3xl" />,
-//       title: "Two-Factor Authentication",
-//       description: "Add an extra layer of security to your vault",
-//     }
-//   ];
-//   return (
-//     <div className="max-w-4xl w-full px-4 py-6">
 //       <div className="text-center mb-8">
 //         <h1 className="text-4xl font-bold mb-4">Welcome to PassVault</h1>
 //         <p className="text-xl text-gray-300">Your secure password manager</p>
