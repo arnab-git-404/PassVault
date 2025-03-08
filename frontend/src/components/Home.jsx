@@ -412,29 +412,7 @@
 //     {
 //       number: 3,
 //       title: "Generate & Store Passwords",
-//       description: "Create strong, unique passwords for your accounts",
-//       icon: <FaDatabase />,
-//       status: isUnlocked ? "complete" : "disabled"
-//     },
-//     {
-//       number: 4,
-//       title: "Access Anywhere Securely",
-//       description: "Your vault is accessible whenever you need it",
-//       icon: <FaShieldAlt />,
-//       status: isUnlocked ? "complete" : "disabled"
-//     }
-//   ];
-
-//   // Example passwords for the visualization
-//   const passwords = [
-//     { site: "Facebook", password: "MySecur3P@ss!" },
-//     { site: "Gmail", password: "Str0ngP@ssw0rd!" },
-//     { site: "Twitter", password: "Tw33t_S@fe_2023" }
-//   ];
-
-//   return (
-//     <div className="max-w-5xl w-full px-4 py-6">
-//       {/* Hero Section */}
+//       
 //       <div className="text-center mb-12">
 //         <div className="inline-block p-2 bg-blue-900 bg-opacity-30 rounded-lg mb-4">
 //           <FaShieldAlt className="text-blue-200 text-4xl inline-block animate-pulse" />
