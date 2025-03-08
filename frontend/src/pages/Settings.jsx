@@ -10,6 +10,8 @@ import {
   FaKey,
   FaExclamationTriangle,
   FaArrowLeft,
+  FaCog,
+
 } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useGlobalContext } from "../context/context";
@@ -28,19 +30,12 @@ function Settings() {
   const [resetMasterKeyLoading, setResetMasterKeyLoading] = useState(false);
   const [showMasterKeyConfirm, setShowMasterKeyConfirm] = useState(false);
 
-  // Password reset states
-  // const [currentPassword, setCurrentPassword] = useState("");
-  // const [newPassword, setNewPassword] = useState("");
-  // const [confirmPassword, setConfirmPassword] = useState("");
-  // const [showCurrentPassword, setShowCurrentPassword] = useState(false);
-  // const [showNewPassword, setShowNewPassword] = useState(false);
-  // const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
   // 2FA states
   const [otpEmail, setOtpEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [sendingOTP, setSendingOTP] = useState(false);
   const serverURL = import.meta.env.VITE_APP_SERVER_URL;
+
 
   // Redirect if not logged in
   useEffect(() => {
@@ -48,11 +43,10 @@ function Settings() {
       navigate("/signin");
     } else if (user && user.email) {
       setOtpEmail(user.email);
-      fetchUser();
     }
   }, [userLoggedIn]);
 
-  console.log(user);
+  // console.log(user);
 
 
   const isTokenValid = async () => {
@@ -64,7 +58,6 @@ function Settings() {
       navigate("/signin");
       return false;
     }
-
 
     try {
       const res = await fetch(`${serverURL}/api/user/user-info`, {
@@ -319,200 +312,219 @@ function Settings() {
 
   return (
     <div className="bg-gray-900 min-h-screen py-6">
-      <div className="max-w-4xl mx-auto px-4">
-        {/* Add back button here */}
 
-        <div className="  flex justify-start mb-8">
+
+
+        <div className="max-w-5xl mx-auto px-4 py-8">
+        {/* Header Section */}
+        <div className="flex flex-col sm:flex-row justify-between items-center mb-8">
           <button
             onClick={() => navigate("/dashboard")}
-            className=" rounded-full hover:cursor-pointer group flex items-center space-x-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5  transition-all duration-200 shadow-lg hover:shadow-indigo-500/50 transform hover:-translate-y-0.5"
+            className="flex items-center text-white bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg transition-all duration-200 shadow-lg hover:shadow-indigo-500/30 mb-4 sm:mb-0 transform hover:scale-105"
           >
-            <div className=" bg-opacity-20 rounded-full p-1.5 mr-1 group-hover:bg-opacity-30 transition-all">
-              <FaArrowLeft className="text-xl" />
-            </div>
-            <span className="font-medium">Back to Dashboard</span>
+            <FaArrowLeft className="mr-2" />
+            <span>Back to Dashboard</span>
           </button>
+          
+          <h1 className="text-3xl font-bold text-white flex items-center">
+            <FaCog className="mr-3 text-indigo-400" />
+            Account Settings
+          </h1>
         </div>
 
-        <h1 className="text-3xl font-bold text-white mb-8 text-center">
-          Account Settings
-        </h1>
-
-        {/* Password Reset */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-            <FaShieldAlt className="mr-2" /> Reset Two-Factor Authentication
-          </h2>
-
-          <form onSubmit={resetTwoFactorAuth}>
-            <div className="mb-4">
-              <label className="block text-gray-700 font-medium mb-2">
-                Email Address
-              </label>
-              <input
-                type="email"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                value={otpEmail}
-                onChange={(e) => setOtpEmail(e.target.value)}
-                placeholder="Your email address"
-                readOnly={user && user.email}
-              />
+        {/* Settings Card Container */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Two-Factor Authentication Reset */}
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+            <div className="bg-indigo-600 px-6 py-4">
+              <h2 className="text-xl font-semibold text-white flex items-center">
+                <FaShieldAlt className="mr-2" /> Reset Two-Factor Authentication
+              </h2>
             </div>
+            <div className="p-6">
+              <form onSubmit={resetTwoFactorAuth} className="space-y-4">
+                <div>
+                  <label className="block text-gray-700 font-medium mb-2">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    value={otpEmail}
+                    onChange={(e) => setOtpEmail(e.target.value)}
+                    placeholder="Your email address"
+                    readOnly={user && user.email}
+                  />
+                </div>
 
-            <div className="mb-4 flex gap-3">
-              <div className="flex-1">
-                <label className="block text-gray-700 font-medium mb-2">
-                  OTP
-                </label>
-                <input
-                  type="text"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                  value={otp}
-                  onChange={(e) => setOtp(e.target.value)}
-                  placeholder="Enter OTP"
-                />
-              </div>
+                <div className="flex gap-3 items-end">
+                  <div className="flex-1">
+                    <label className="block text-gray-700 font-medium mb-2">
+                      OTP
+                    </label>
+                    <input
+                      type="text"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                      value={otp}
+                      onChange={(e) => setOtp(e.target.value)}
+                      placeholder="Enter OTP"
+                    />
+                  </div>
 
-              <div className="flex items-end">
+                  <button
+                    type="button"
+                    onClick={sendResetOTP}
+                    disabled={sendingOTP}
+                    className="px-4 py-3 h-[46px] border border-gray-300 bg-gray-50 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors"
+                  >
+                    {sendingOTP ? (
+                      <>
+                        <FaSpinner className="inline mr-2 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      "Send OTP"
+                    )}
+                  </button>
+                </div>
+
                 <button
-                  type="button"
-                  onClick={sendResetOTP}
-                  disabled={sendingOTP}
-                  className=" hover:cursor-pointer px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  type="submit"
+                  disabled={loading}
+                  className="w-full py-3 px-4 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 shadow-md hover:shadow-lg"
                 >
-                  {sendingOTP ? (
+                  {loading ? (
                     <>
                       <FaSpinner className="inline mr-2 animate-spin" />
-                      Sending...
+                      Processing...
                     </>
                   ) : (
-                    "Send OTP"
+                    "Reset 2FA"
                   )}
                 </button>
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              disabled={loading}
-              className=" hover:cursor-pointer w-full py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              {loading ? (
-                <FaSpinner className="inline mr-2 animate-spin" />
-              ) : (
-                "Reset 2FA"
-              )}
-            </button>
-          </form>
-        </div>
-
-
-
-        {/* Master Key Reset */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-2 flex items-center">
-            <FaKey className="mr-2" /> Reset Master Key
-          </h2>
-
-          <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
-            <div className="flex">
-              <div className="flex-shrink-0">
-                <FaExclamationTriangle className="h-5 w-5 text-yellow-400" />
-              </div>
-              <div className="ml-3">
-                <p className="text-sm text-yellow-700">
-                  <strong>Warning:</strong> Resetting your master key will{" "}
-                  <strong>permanently delete all your saved passwords</strong>.
-                  You will need to set up a new master key and re-add all your
-                  passwords.
-                </p>
-              </div>
+              </form>
             </div>
           </div>
 
-          <form onSubmit={handleMasterKeyReset}>
-            <div className="mb-4 flex gap-3">
-              <div className="flex-1">
-                <label className="block text-gray-700 font-medium mb-2">
-                  Email Verification OTP
-                </label>
-                <input
-                  type="text"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                  value={masterKeyResetOtp}
-                  onChange={(e) => setMasterKeyResetOtp(e.target.value)}
-                  placeholder="Enter OTP sent to your email"
-                />
+          {/* Master Key Reset */}
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+            <div className="bg-indigo-600 px-6 py-4">
+              <h2 className="text-xl font-semibold text-white flex items-center">
+                <FaKey className="mr-2" /> Reset Master Key
+              </h2>
+            </div>
+            <div className="p-6">
+              <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6 rounded-r">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <FaExclamationTriangle className="h-5 w-5 text-yellow-400" />
+                  </div>
+                  <div className="ml-3">
+                    <p className="text-sm text-yellow-700">
+                      <strong>Warning:</strong> Resetting your master key will{" "}
+                      <strong>permanently delete all your saved passwords</strong>.
+                      You will need to set up a new master key and re-add all your
+                      passwords.
+                    </p>
+                  </div>
+                </div>
               </div>
 
-              <div className="flex items-end">
+              <form onSubmit={handleMasterKeyReset} className="space-y-4">
+                <div className="flex gap-3 items-end">
+                  <div className="flex-1">
+                    <label className="block text-gray-700 font-medium mb-2">
+                      Email Verification OTP
+                    </label>
+                    <input
+                      type="text"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                      value={masterKeyResetOtp}
+                      onChange={(e) => setMasterKeyResetOtp(e.target.value)}
+                      placeholder="Enter OTP sent to your email"
+                    />
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={sendMasterKeyResetOTP}
+                    disabled={sendingMasterKeyOtp}
+                    className="px-4 py-3 h-[46px] border border-gray-300 bg-gray-50 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors"
+                  >
+                    {sendingMasterKeyOtp ? (
+                      <>
+                        <FaSpinner className="inline mr-2 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      "Send OTP"
+                    )}
+                  </button>
+                </div>
+
+                {/* Only show 2FA field if user has 2FA enabled */}
+                {user && user.is_2FA_Enabled && (
+                  <div>
+                    <label className="block text-gray-700 font-medium mb-2">
+                      Two-Factor Authentication Code
+                    </label>
+                    <input
+                      type="text"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                      value={twoFactorCode}
+                      onChange={(e) => setTwoFactorCode(e.target.value)}
+                      placeholder="Enter your 2FA code"
+                    />
+                  </div>
+                )}
+
                 <button
-                  type="button"
-                  onClick={sendMasterKeyResetOTP}
-                  disabled={sendingMasterKeyOtp}
-                  className="hover:cursor-pointer px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  type="submit"
+                  disabled={resetMasterKeyLoading}
+                  className="w-full py-3 px-4 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 shadow-md hover:shadow-lg"
                 >
-                  {sendingMasterKeyOtp ? (
+                  {resetMasterKeyLoading ? (
                     <>
                       <FaSpinner className="inline mr-2 animate-spin" />
-                      Sending...
+                      Processing...
                     </>
                   ) : (
-                    "Send OTP"
+                    "Reset Master Key & Delete All Passwords"
                   )}
                 </button>
-              </div>
+              </form>
             </div>
+          </div>
 
-            {/* Only show 2FA field if user has 2FA enabled */}
-            {user && user.is_2FA_Enabled && (
-              <div className="mb-4">
-                <label className="block text-gray-700 font-medium mb-2">
-                  Two-Factor Authentication Code
-                </label>
-                <input
-                  type="text"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                  value={twoFactorCode}
-                  onChange={(e) => setTwoFactorCode(e.target.value)}
-                  placeholder="Enter your 2FA code"
-                />
+          {/* Delete Account - Full Width */}
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 lg:col-span-2">
+            <div className="bg-red-600 px-6 py-4">
+              <h2 className="text-xl font-semibold text-white flex items-center">
+                <FaTrash className="mr-2" /> Delete Account
+              </h2>
+            </div>
+            <div className="p-6">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="p-3 bg-red-100 rounded-full">
+                  <FaExclamationTriangle className="text-red-500 text-xl" />
+                </div>
+                <p className="text-gray-600 font-extrabold ">
+                  This action will permanently delete your account and all associated
+                  data. This cannot be undone.
+                </p>
               </div>
-            )}
 
-            <button
-              type="submit"
-              disabled={resetMasterKeyLoading}
-              className=" hover:cursor-pointer w-full py-2 px-4 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-            >
-              {resetMasterKeyLoading ? (
-                <FaSpinner className="inline mr-2 animate-spin" />
-              ) : (
-                "Reset Master Key & Delete All Passwords"
-              )}
-            </button>
-          </form>
-        </div>
-
-        {/* Delete Account */}
-        <div className="bg-white rounded-lg shadow-lg p-6">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-            <FaTrash className="mr-2" /> Delete Account
-          </h2>
-
-          <p className="text-gray-600 mb-4 hover:text-gray-800">
-            This action will permanently delete your account and all associated
-            data. This cannot be undone.
-          </p>
-
-          <button
-            onClick={() => confirmAction("delete_account")}
-            className=" hover:cursor-pointer w-full py-2 px-4 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-          >
-            Delete My Account
-          </button>
+              <button
+                onClick={() => confirmAction("delete_account")}
+                className="w-full py-3 px-4 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 shadow-md hover:shadow-lg"
+              >
+                Delete My Account
+              </button>
+            </div>
+          </div>
         </div>
       </div>
+
 
       {/* Add Master Key Reset Confirmation Dialog */}
       {showMasterKeyConfirm && (
