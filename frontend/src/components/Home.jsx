@@ -12,20 +12,7 @@
 //               <div className="mt-6">
 //                 <div className="text-center text-sm text-gray-400 mb-3">Example Password Storage</div>
 //                 <div className="border border-gray-700 rounded-lg overflow-hidden">
-//                   {passwords.map((item, index) => (
-
-//                 } animate-pulse`}
-//               >
-//                 {isUnlocked ?
-//                   "Vault is unlocked - passwords are being decrypted" :
-//                   "Vault is locked - passwords are encrypted"}
-//     las
-//           <li className="transition-all hover:translate-x-1">
-//             Enable 2FA for additional account security
-//           </li>
-//         </ul>
-//       </div>
-//     </div>
+//         
 //   );
 // }
 
