@@ -261,24 +261,7 @@
 //           <FaFingerprint className="text-blue-400 mr-3" />
 //           Security Visualization
 //         </h2>
-//         <div className="flex flex-wrap justify-center">
-//           <div className="max-w-lg w-full">
-//             <div className="relative p-4">
-6">
-//                 <div className="text-center text-sm text-gray-400 mb-3">Example Password Storage</div>
-//                 <div className="border border-gray-700 rounded-lg overflow-hidden">
-//                   <div className="bg-gray-800 p-3 border-b border-gray-700 flex justify-between">
-//                     <div>Facebook</div>
-//                     <div className="flex items-center">
-//                       <span className="bg-gray-900 px-3 py-1 rounded-full text-xs mr-2">
-//                         {isUnlocked ? "MySecur3P@ss!" : "••••••••••••"}
-//                       </span>
-//                       <FaEye className="text-blue-500" />
-//                     </div>
-//                   </div>
-//                   <div className="bg-gray-800 p-3 border-b border-gray-700 flex justify-between">
-//                     <div>Gmail</div>
-//                     <div className="flex items-center">
+
 //                       <span className="bg-gray-900 px-3 py-1 rounded-full text-xs mr-2">
 //                         {isUnlocked ? "Str0ngP@ssw0rd!" : "••••••••••••••"}
 //                       </span>
