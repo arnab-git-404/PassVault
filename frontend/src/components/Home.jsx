@@ -1,5 +1,3 @@
-
-
 // 4TH Version Of Home page
 import React, { useState, useEffect } from "react";
 // Update the imports section
@@ -174,176 +172,184 @@ export default function Home({ isSetup, isUnlocked, onSetupClick }) {
         </div>
       </div>
 
+      {/* Visual Process Flow with Animation - IMPROVED */}
+      <div className="bg-gray-900 rounded-xl p-6 mb-10 relative overflow-hidden">
+        <h2 className="text-2xl font-bold mb-8 text-center flex items-center justify-center">
+          <FaShieldAlt
+            className={`text-blue-400 mr-3 ${
+              animationStep === 0 ? "animate-pulse" : ""
+            }`}
+          />
+          How PassVault Works
+        </h2>
 
-    {/* Visual Process Flow with Animation - IMPROVED */}
-<div className="bg-gray-900 rounded-xl p-6 mb-10 relative overflow-hidden">
-  <h2 className="text-2xl font-bold mb-8 text-center flex items-center justify-center">
-    <FaShieldAlt className={`text-blue-400 mr-3 ${animationStep === 0 ? 'animate-pulse' : ''}`} />
-    How PassVault Works
-  </h2>
-
-  {/* Progress indicator */}
-  <div className="hidden lg:block absolute top-0 left-0 w-full h-2 bg-gray-800">
-    <div
-      className="h-full transition-all duration-1000 ease-in-out"
-      style={{
-        width: isSetup ? (isUnlocked ? "100%" : "50%") : "25%",
-        background: isUnlocked
-          ? "linear-gradient(90deg, #10B981, #3B82F6)"
-          : "linear-gradient(90deg, #3B82F6, #8B5CF6)",
-      }}
-    ></div>
-  </div>
-
-  {/* Current stage indicator */}
-  <div className="flex justify-center mb-8">
-    <div className="inline-flex bg-gray-800 rounded-full px-4 py-2">
-      <span className="text-sm">
-        Current Stage: 
-        <span className="ml-2 font-medium">
-          {!isSetup 
-            ? "Not Set Up" 
-            : !isUnlocked 
-              ? "Set Up, Locked" 
-              : "Fully Configured"}
-        </span>
-        <span className={`ml-2 inline-block w-2 h-2 rounded-full ${
-          !isSetup 
-            ? "bg-red-500" 
-            : !isUnlocked 
-              ? "bg-yellow-500" 
-              : "bg-green-500"
-        }`}></span>
-      </span>
-    </div>
-  </div>
-
-  <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-    {steps.map((step, index) => {
-      let statusColors;
-      let activeClass = "";
-      let stepStatusText = "";
-      let statusBadgeClass = "";
-
-      // Animation for current step
-      if (animationStep === index) {
-        activeClass = "ring-2 ring-offset-4 ring-offset-gray-900 ring-blue-500 transform scale-105";
-      }
-
-      // Determine step status styling and text
-      switch(step.status) {
-        case 'complete':
-          statusColors = "bg-gradient-to-br from-green-900 to-green-800 border-green-600 text-green-300";
-          stepStatusText = "Complete";
-          statusBadgeClass = "bg-green-700 text-green-200";
-          break;
-        case 'pending':
-          statusColors = "bg-gradient-to-br from-yellow-900 to-yellow-800 border-yellow-600 text-yellow-300";
-          stepStatusText = "Pending";
-          statusBadgeClass = "bg-yellow-700 text-yellow-200";
-          break;
-        default:
-          statusColors = "bg-gradient-to-br from-gray-800 to-gray-900 border-gray-700 text-gray-500";
-          stepStatusText = "Locked";
-          statusBadgeClass = "bg-gray-700 text-gray-400";
-      }
-
-      return (
-        <div
-          key={index}
-          className={`relative rounded-lg p-5 border shadow-lg transition-all duration-500 ${statusColors} ${activeClass} hover:shadow-xl`}
-        >
-          {/* Status badge */}
-          <div className={`absolute top-3 right-3 rounded-full px-2 py-0.5 text-xs ${statusBadgeClass}`}>
-            {stepStatusText}
-          </div>
-          
-          {/* Step number badge */}
-          <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-sm border-2 border-gray-900">
-            {step.number}
-          </div>
-
-          <div className="flex items-center mb-4 mt-2">
-            <div className={`rounded-full p-2.5 ${statusColors} ${
-              animationStep === index ? 'animate-pulse shadow-glow' : ''
-            }`}>
-              {step.icon}
-            </div>
-            <div className="font-bold text-lg ml-3">{step.title}</div>
-          </div>
-          
-          <p className="text-sm mb-3">{step.description}</p>
-          
-          {/* Action button for each step */}
-          <div className="mt-2">
-            {step.status === "complete" && 
-              <span className="inline-flex items-center text-xs text-green-300">
-                <FaCheck className="mr-1" /> Completed
-              </span>
-            }
-            {step.status === "pending" && 
-              <button 
-                className="text-xs bg-yellow-600 hover:bg-yellow-700 text-white px-3 py-1 rounded-full transition-colors"
-                onClick={step.number === 2 ? onSetupClick : null}
-              >
-                {step.number === 2 ? "Unlock Now" : "Start"}
-              </button>
-            }
-            {step.status === "disabled" && 
-              <span className="inline-flex items-center text-xs text-gray-500">
-                <FaLock className="mr-1" /> Complete previous steps first
-              </span>
-            }
-          </div>
-          
-          {/* Connection arrow */}
-          {index < steps.length - 1 && (
-            <div className="hidden lg:flex absolute -right-3 top-1/2 transform -translate-y-1/2 z-10">
-              <div className={`w-6 h-6 rounded-full flex items-center justify-center 
-                ${step.status !== "disabled" ? "bg-blue-600" : "bg-gray-800"}`}>
-                <FaArrowRight className={`text-sm 
-                  ${step.status !== "disabled" ? "text-white" : "text-gray-600"}
-                  ${animationStep === index ? "animate-bounce" : ""}`} 
-                />
-              </div>
-            </div>
-          )}
-          
-          {/* Animated highlight if current step */}
-          {animationStep === index && (
-            <div className="absolute inset-0 bg-blue-500 opacity-10 rounded-lg animate-pulse"></div>
-          )}
+        {/* Progress indicator */}
+        <div className="hidden lg:block absolute top-0 left-0 w-full h-2 bg-gray-800">
+          <div
+            className="h-full transition-all duration-1000 ease-in-out"
+            style={{
+              width: isSetup ? (isUnlocked ? "100%" : "50%") : "25%",
+              background: isUnlocked
+                ? "linear-gradient(90deg, #10B981, #3B82F6)"
+                : "linear-gradient(90deg, #3B82F6, #8B5CF6)",
+            }}
+          ></div>
         </div>
-      );
-    })}
-  </div>
-  
-  {/* Progress summary text */}
-  <div className="text-center mt-8 bg-gray-800 p-3 rounded-lg">
-    <p className="text-sm">
-      {!isSetup ? (
-        <span>Get started by setting up your master password</span>
-      ) : !isUnlocked ? (
-        <span>Your vault is set up! Unlock it to access your passwords</span>
-      ) : (
-        <span>Your vault is fully configured and unlocked. You can now store and manage passwords securely!</span>
-      )}
-    </p>
-  </div>
-</div>
 
+        {/* Current stage indicator */}
+        <div className="flex justify-center mb-8">
+          <div className="inline-flex bg-gray-800 rounded-full px-4 py-2">
+            <span className="text-sm">
+              Current Stage:
+              <span className="ml-2 font-medium">
+                {!isSetup
+                  ? "Not Set Up"
+                  : !isUnlocked
+                  ? "Set Up, Locked"
+                  : "Fully Configured"}
+              </span>
+              <span
+                className={`ml-2 inline-block w-2 h-2 rounded-full ${
+                  !isSetup
+                    ? "bg-red-500"
+                    : !isUnlocked
+                    ? "bg-yellow-500"
+                    : "bg-green-500"
+                }`}
+              ></span>
+            </span>
+          </div>
+        </div>
 
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+          {steps.map((step, index) => {
+            let statusColors;
+            let activeClass = "";
+            let stepStatusText = "";
+            let statusBadgeClass = "";
 
+            // Animation for current step
+            if (animationStep === index) {
+              activeClass =
+                "ring-2 ring-offset-4 ring-offset-gray-900 ring-blue-500 transform scale-105";
+            }
 
+            // Determine step status styling and text
+            switch (step.status) {
+              case "complete":
+                statusColors =
+                  "bg-gradient-to-br from-green-900 to-green-800 border-green-600 text-green-300";
+                stepStatusText = "Complete";
+                statusBadgeClass = "bg-green-700 text-green-200";
+                break;
+              case "pending":
+                statusColors =
+                  "bg-gradient-to-br from-yellow-900 to-yellow-800 border-yellow-600 text-yellow-300";
+                stepStatusText = "Pending";
+                statusBadgeClass = "bg-yellow-700 text-yellow-200";
+                break;
+              default:
+                statusColors =
+                  "bg-gradient-to-br from-gray-800 to-gray-900 border-gray-700 text-gray-500";
+                stepStatusText = "Locked";
+                statusBadgeClass = "bg-gray-700 text-gray-400";
+            }
 
+            return (
+              <div
+                key={index}
+                className={`relative rounded-lg p-5 border shadow-lg transition-all duration-500 ${statusColors} ${activeClass} hover:shadow-xl`}
+              >
+                {/* Status badge */}
+                <div
+                  className={`absolute top-3 right-3 rounded-full px-2 py-0.5 text-xs ${statusBadgeClass}`}
+                >
+                  {stepStatusText}
+                </div>
 
+                {/* Step number badge */}
+                <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-sm border-2 border-gray-900">
+                  {step.number}
+                </div>
 
+                <div className="flex items-center mb-4 mt-2">
+                  <div
+                    className={`rounded-full p-2.5 ${statusColors} ${
+                      animationStep === index ? "animate-pulse shadow-glow" : ""
+                    }`}
+                  >
+                    {step.icon}
+                  </div>
+                  <div className="font-bold text-lg ml-3">{step.title}</div>
+                </div>
 
+                <p className="text-sm mb-3">{step.description}</p>
 
+                {/* Action button for each step */}
+                <div className="mt-2">
+                  {step.status === "complete" && (
+                    <span className="inline-flex items-center text-xs text-green-300">
+                      <FaCheck className="mr-1" /> Completed
+                    </span>
+                  )}
+                  {step.status === "pending" && (
+                    <button
+                      className="text-xs bg-yellow-600 hover:bg-yellow-700 text-white px-3 py-1 rounded-full transition-colors"
+                      onClick={step.number === 2 ? onSetupClick : null}
+                    >
+                      {step.number === 2 ? "Unlock Now" : "Start"}
+                    </button>
+                  )}
+                  {step.status === "disabled" && (
+                    <span className="inline-flex items-center text-xs text-gray-500">
+                      <FaLock className="mr-1" /> Complete previous steps first
+                    </span>
+                  )}
+                </div>
 
+                {/* Connection arrow */}
+                {index < steps.length - 1 && (
+                  <div className="hidden lg:flex absolute -right-3 top-1/2 transform -translate-y-1/2 z-10">
+                    <div
+                      className={`w-6 h-6 rounded-full flex items-center justify-center 
+                ${step.status !== "disabled" ? "bg-blue-600" : "bg-gray-800"}`}
+                    >
+                      <FaArrowRight
+                        className={`text-sm 
+                  ${step.status !== "disabled" ? "text-white" : "text-gray-600"}
+                  ${animationStep === index ? "animate-bounce" : ""}`}
+                      />
+                    </div>
+                  </div>
+                )}
 
+                {/* Animated highlight if current step */}
+                {animationStep === index && (
+                  <div className="absolute inset-0 bg-blue-500 opacity-10 rounded-lg animate-pulse"></div>
+                )}
+              </div>
+            );
+          })}
+        </div>
 
-
+        {/* Progress summary text */}
+        <div className="text-center mt-8 bg-gray-800 p-3 rounded-lg">
+          <p className="text-sm">
+            {!isSetup ? (
+              <span>Get started by setting up your master password</span>
+            ) : !isUnlocked ? (
+              <span>
+                Your vault is set up! Unlock it to access your passwords
+              </span>
+            ) : (
+              <span>
+                Your vault is fully configured and unlocked. You can now store
+                and manage passwords securely!
+              </span>
+            )}
+          </p>
+        </div>
+      </div>
 
       {/* Security Features Grid */}
       <div className="mb-10">
@@ -652,13 +658,11 @@ export default function Home({ isSetup, isUnlocked, onSetupClick }) {
         </div>
       </div>
 
-
-
       {/* Master Password Security Flow Visualization */}
-      <div className="bg-gray-900 rounded-xl p-6 mb-8">
-        <h2 className="text-2xl font-bold mb-6 flex items-center">
+      <div className="bg-gray-900 rounded-xl p-4 sm:p-6 mb-8">
+        <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 flex items-center">
           <FaKey
-            className={`text-yellow-400 mr-3 ${
+            className={`text-yellow-400 mr-2 sm:mr-3 ${
               animationStep === 0 ? "animate-pulse" : ""
             }`}
           />
@@ -666,40 +670,44 @@ export default function Home({ isSetup, isUnlocked, onSetupClick }) {
         </h2>
 
         <div className="flex flex-col items-center">
-          <div className="max-w-3xl w-full">
-            <div className="relative mb-6">
-              <h3 className="text-center text-lg font-semibold mb-4">
+          <div className="w-full">
+            <div className="relative mb-4 sm:mb-6">
+              <h3 className="text-center text-base sm:text-lg font-semibold mb-3 sm:mb-4">
                 How Your Master Password Stays Secure
               </h3>
 
               {/* Master password flow visualization */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mt-4 sm:mt-8">
                 {/* Left side - what happens on your device */}
-                <div className="bg-gray-800 p-4 rounded-lg border border-blue-900">
-                  <h4 className="text-center text-blue-400 font-semibold mb-4">
+                <div className="bg-gray-800 p-3 sm:p-4 rounded-lg border border-blue-900">
+                  <h4 className="text-center text-blue-400 font-semibold mb-3 sm:mb-4 text-sm sm:text-base">
                     On Your Device
                   </h4>
 
-                  <div className="space-y-6">
+                  <div className="space-y-4 sm:space-y-6">
                     {/* Step 1: Enter Master Password */}
                     <div
-                      className={`p-3 rounded-lg ${
+                      className={`p-2 sm:p-3 rounded-lg ${
                         animationStep === 0 ? "bg-blue-900 bg-opacity-20" : ""
                       } transition-colors duration-300`}
                     >
                       <div className="flex items-center mb-2">
-                        <div className="w-8 h-8 rounded-full bg-blue-900 flex items-center justify-center mr-3">
-                          <span className="text-blue-200 font-bold">1</span>
+                        <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-blue-900 flex items-center justify-center mr-2 sm:mr-3">
+                          <span className="text-blue-200 font-bold text-xs sm:text-sm">
+                            1
+                          </span>
                         </div>
-                        <h5 className="font-semibold">Enter Master Password</h5>
+                        <h5 className="font-semibold text-sm sm:text-base">
+                          Enter Master Password
+                        </h5>
                       </div>
 
-                      <div className="pl-11">
-                        <div className="bg-gray-900 p-2 rounded border border-gray-700 flex">
-                          <span className="font-mono text-gray-400">
+                      <div className="pl-8 sm:pl-11">
+                        <div className="bg-gray-900 p-2 rounded border border-gray-700 flex flex-wrap">
+                          <span className="font-mono text-gray-400 text-xs sm:text-sm">
                             Password:{" "}
                           </span>
-                          <span className="font-mono text-blue-300 ml-2">
+                          <span className="font-mono text-blue-300 ml-1 sm:ml-2 text-xs sm:text-sm">
                             {animationStep === 0
                               ? "SuperSecret123!"
                               : "•••••••••••••"}
@@ -710,24 +718,28 @@ export default function Home({ isSetup, isUnlocked, onSetupClick }) {
 
                     {/* Step 2: Generate Random Salt */}
                     <div
-                      className={`p-3 rounded-lg ${
+                      className={`p-2 sm:p-3 rounded-lg ${
                         animationStep === 1 ? "bg-blue-900 bg-opacity-20" : ""
                       } transition-colors duration-300`}
                     >
                       <div className="flex items-center mb-2">
-                        <div className="w-8 h-8 rounded-full bg-blue-900 flex items-center justify-center mr-3">
-                          <span className="text-blue-200 font-bold">2</span>
+                        <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-blue-900 flex items-center justify-center mr-2 sm:mr-3">
+                          <span className="text-blue-200 font-bold text-xs sm:text-sm">
+                            2
+                          </span>
                         </div>
-                        <h5 className="font-semibold">Generate Random Salt</h5>
+                        <h5 className="font-semibold text-sm sm:text-base">
+                          Generate Random Salt
+                        </h5>
                       </div>
 
-                      <div className="pl-11">
+                      <div className="pl-8 sm:pl-11">
                         <div className="bg-gray-900 p-2 rounded border border-gray-700">
-                          <span className="font-mono text-gray-400">
+                          <span className="font-mono text-gray-400 text-xs sm:text-sm">
                             Salt:{" "}
                           </span>
                           <span
-                            className={`font-mono text-purple-300 ${
+                            className={`font-mono text-purple-300 text-xs sm:text-sm truncate block ${
                               animationStep === 1 ? "animate-pulse" : ""
                             }`}
                           >
@@ -737,27 +749,27 @@ export default function Home({ isSetup, isUnlocked, onSetupClick }) {
                       </div>
                     </div>
 
-
-
-                    {/* Step 3: Key Derivation - ENHANCED to show both outputs */}
+                    {/* Step 3: Key Derivation */}
                     <div
-                      className={`p-3 rounded-lg ${
+                      className={`p-2 sm:p-3 rounded-lg ${
                         animationStep === 2 ? "bg-blue-900 bg-opacity-20" : ""
                       } transition-colors duration-300`}
                     >
                       <div className="flex items-center mb-2">
-                        <div className="w-8 h-8 rounded-full bg-blue-900 flex items-center justify-center mr-3">
-                          <span className="text-blue-200 font-bold">3</span>
+                        <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-blue-900 flex items-center justify-center mr-2 sm:mr-3">
+                          <span className="text-blue-200 font-bold text-xs sm:text-sm">
+                            3
+                          </span>
                         </div>
-                        <h5 className="font-semibold">
+                        <h5 className="font-semibold text-sm sm:text-base">
                           Derive Key & Verification Hash
                         </h5>
                       </div>
 
-                      <div className="pl-11 relative">
-                        {/* Inputs: Password + Salt */}
-                        <div className="flex items-center">
-                          <div className="w-1/2 bg-gray-900 p-2 rounded-l border border-gray-700">
+                      <div className="pl-8 sm:pl-11 relative">
+                        {/* Inputs: Password + Salt - Made responsive */}
+                        <div className="flex flex-col sm:flex-row items-center">
+                          <div className="w-full sm:w-1/2 bg-gray-900 p-2 rounded-t sm:rounded-l sm:rounded-tr-none border border-gray-700 mb-2 sm:mb-0">
                             <div className="flex flex-col">
                               <span className="font-mono text-gray-400 text-xs">
                                 Password
@@ -767,10 +779,10 @@ export default function Home({ isSetup, isUnlocked, onSetupClick }) {
                               </span>
                             </div>
                           </div>
-                          <div className="flex items-center justify-center w-8">
+                          <div className="flex items-center justify-center w-8 mb-2 sm:mb-0">
                             <FaPlus className="text-gray-500" />
                           </div>
-                          <div className="w-1/2 bg-gray-900 p-2 rounded-r border border-gray-700">
+                          <div className="w-full sm:w-1/2 bg-gray-900 p-2 rounded-b sm:rounded-r sm:rounded-bl-none border border-gray-700">
                             <div className="flex flex-col">
                               <span className="font-mono text-gray-400 text-xs">
                                 Salt
@@ -784,8 +796,8 @@ export default function Home({ isSetup, isUnlocked, onSetupClick }) {
 
                         {/* PBKDF2 Process */}
                         <div className="my-3 text-center p-2 bg-blue-800 bg-opacity-20 rounded-lg border border-blue-900">
-                          <div className="font-mono text-xs text-blue-300">
-                            PBKDF2(password, salt, 100,000 iterations)
+                          <div className="font-mono text-xs text-blue-300 break-words">
+                            PBKDF2(password, salt, 100,000)
                           </div>
                           <div
                             className={`${
@@ -798,7 +810,7 @@ export default function Home({ isSetup, isUnlocked, onSetupClick }) {
 
                         {/* Dual Outputs with Animation */}
                         <div
-                          className={` flex justify-center text-center mt-1 ${
+                          className={`flex justify-center text-center mt-1 ${
                             animationStep === 2
                               ? "text-yellow-500 animate-bounce"
                               : "text-gray-500"
@@ -807,8 +819,8 @@ export default function Home({ isSetup, isUnlocked, onSetupClick }) {
                           <FaArrowDown />
                         </div>
 
-                        {/* Two outputs */}
-                        <div className="mt-2 grid grid-cols-2 gap-3">
+                        {/* Two outputs - Made responsive */}
+                        <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
                           {/* Encryption Key - Stays on Device */}
                           <div className="bg-gray-900 p-2 rounded border border-green-700 relative">
                             <div className="flex justify-between">
@@ -820,7 +832,7 @@ export default function Home({ isSetup, isUnlocked, onSetupClick }) {
                               </span>
                             </div>
                             <span
-                              className={`font-mono text-green-300 text-xs ${
+                              className={`font-mono text-green-300 text-xs truncate block ${
                                 animationStep === 2 ? "animate-pulse" : ""
                               }`}
                             >
@@ -840,11 +852,11 @@ export default function Home({ isSetup, isUnlocked, onSetupClick }) {
                                 Verify Hash:
                               </span>
                               <span className="text-xs text-yellow-400">
-                                To DataBase
+                                To DB
                               </span>
                             </div>
                             <span
-                              className={`font-mono text-yellow-300 text-xs ${
+                              className={`font-mono text-yellow-300 text-xs truncate block ${
                                 animationStep === 2 ? "animate-pulse" : ""
                               }`}
                             >
@@ -860,71 +872,70 @@ export default function Home({ isSetup, isUnlocked, onSetupClick }) {
 
                         {/* Animation showing verification hash traveling to database */}
                         {animationStep === 2 && (
-                          <div className="absolute w-4 h-4 bg-yellow-500 rounded-full right-0 top-1/2 transform -translate-y-1/2 animate-ping opacity-75"></div>
+                          <div className="hidden sm:block absolute w-4 h-4 bg-yellow-500 rounded-full right-0 top-1/2 transform -translate-y-1/2 animate-ping opacity-75"></div>
                         )}
                       </div>
                     </div>
-
                   </div>
                 </div>
 
                 {/* Right side - what's stored in database */}
-                <div className="bg-gray-800 p-4 rounded-lg border border-purple-900">
-                  <h4 className="text-center text-purple-400 font-semibold mb-4">
+                <div className="bg-gray-800 p-3 sm:p-4 rounded-lg border border-purple-900 mt-4 lg:mt-0">
+                  <h4 className="text-center text-purple-400 font-semibold mb-3 sm:mb-4 text-sm sm:text-base">
                     In Database
                   </h4>
 
-                  <div className="space-y-6 relative">
+                  <div className="space-y-4 sm:space-y-6 relative">
                     {/* Database storage visualization */}
                     <div
-                      className={`p-4 bg-gray-900 rounded-lg border ${
+                      className={`p-3 sm:p-4 bg-gray-900 rounded-lg border ${
                         animationStep === 3
                           ? "border-green-700"
                           : "border-gray-700"
                       } transition-colors duration-300`}
                     >
-                      <h5 className="font-semibold mb-4 text-center">
+                      <h5 className="font-semibold mb-3 sm:mb-4 text-center text-sm sm:text-base">
                         User Record
                       </h5>
 
-                      <div className="grid grid-cols-2 gap-3">
-                        <div className="col-span-2 bg-gray-800 p-2 rounded">
-                          <span className="font-mono text-gray-400">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+                        <div className="col-span-1 sm:col-span-2 bg-gray-800 p-2 rounded">
+                          <span className="font-mono text-gray-400 text-xs">
                             user_id:{" "}
                           </span>
-                          <span className="font-mono text-blue-300">
+                          <span className="font-mono text-blue-300 text-xs">
                             u_839472
                           </span>
                         </div>
 
                         <div className="bg-gray-800 p-2 rounded">
-                          <span className="font-mono text-gray-400">
+                          <span className="font-mono text-gray-400 text-xs">
                             email:{" "}
                           </span>
-                          <span className="font-mono text-blue-300">
+                          <span className="font-mono text-blue-300 text-xs truncate block">
                             user@example.com
                           </span>
                         </div>
 
                         <div className="bg-gray-800 p-2 rounded">
-                          <span className="font-mono text-gray-400">
+                          <span className="font-mono text-gray-400 text-xs">
                             created_at:{" "}
                           </span>
-                          <span className="font-mono text-blue-300">
+                          <span className="font-mono text-blue-300 text-xs">
                             2023-04-15
                           </span>
                         </div>
 
                         <div
-                          className={`col-span-2 bg-gray-800 p-2 rounded ${
+                          className={`col-span-1 sm:col-span-2 bg-gray-800 p-2 rounded ${
                             animationStep === 3 ? "border border-green-600" : ""
                           } transition-colors duration-300`}
                         >
-                          <span className="font-mono text-gray-400">
+                          <span className="font-mono text-gray-400 text-xs">
                             salt:{" "}
                           </span>
                           <span
-                            className={`font-mono text-purple-300 ${
+                            className={`font-mono text-purple-300 text-xs truncate block ${
                               animationStep === 3 ? "animate-pulse" : ""
                             }`}
                           >
@@ -933,15 +944,15 @@ export default function Home({ isSetup, isUnlocked, onSetupClick }) {
                         </div>
 
                         <div
-                          className={`col-span-2 bg-gray-800 p-2 rounded ${
+                          className={`col-span-1 sm:col-span-2 bg-gray-800 p-2 rounded ${
                             animationStep === 3 ? "border border-green-600" : ""
                           } transition-colors duration-300`}
                         >
-                          <span className="font-mono text-gray-400">
+                          <span className="font-mono text-gray-400 text-xs">
                             verification_hash:{" "}
                           </span>
                           <span
-                            className={`font-mono text-green-300 ${
+                            className={`font-mono text-green-300 text-xs truncate block ${
                               animationStep === 3 ? "animate-pulse" : ""
                             }`}
                           >
@@ -950,36 +961,34 @@ export default function Home({ isSetup, isUnlocked, onSetupClick }) {
                         </div>
 
                         {/* What's NOT stored - Master Password */}
-                        <div className="col-span-2 mt-2 flex items-center p-2 bg-red-900 bg-opacity-20 rounded-lg">
-                          <FaExclamationCircle className="text-red-500 mr-2" />
-                          <span className="text-red-300 text-sm font-medium">
+                        <div className="col-span-1 sm:col-span-2 mt-2 flex items-center p-2 bg-red-900 bg-opacity-20 rounded-lg">
+                          <FaExclamationCircle className="text-red-500 mr-2 flex-shrink-0" />
+                          <span className="text-red-300 text-xs sm:text-sm font-medium">
                             Master password is <strong>never</strong> stored!
                           </span>
                         </div>
 
                         {/* What's NOT stored - Master Key */}
-                        <div className="col-span-2 flex items-center p-2 bg-red-900 bg-opacity-20 rounded-lg">
-                          <FaExclamationCircle className="text-red-500 mr-2" />
-                          <span className="text-red-300 text-sm font-medium">
+                        <div className="col-span-1 sm:col-span-2 flex items-center p-2 bg-red-900 bg-opacity-20 rounded-lg">
+                          <FaExclamationCircle className="text-red-500 mr-2 flex-shrink-0" />
+                          <span className="text-red-300 text-xs sm:text-sm font-medium">
                             Encryption key is <strong>never</strong> sent to
                             server!
                           </span>
                         </div>
-
                       </div>
                     </div>
 
-
                     {/* Explanation of verification process */}
                     <div
-                      className={`p-3 bg-blue-900 bg-opacity-20 rounded-lg border border-blue-700 ${
+                      className={`p-2 sm:p-3 bg-blue-900 bg-opacity-20 rounded-lg border border-blue-700 ${
                         animationStep === 3 ? "animate-pulse" : ""
                       }`}
                     >
-                      <h5 className="font-semibold mb-2">
+                      <h5 className="font-semibold mb-1 sm:mb-2 text-sm sm:text-base">
                         How We Verify Your Password
                       </h5>
-                      <ol className="list-decimal pl-5 text-sm space-y-1">
+                      <ol className="list-decimal pl-4 sm:pl-5 text-xs sm:text-sm space-y-0.5 sm:space-y-1">
                         <li>When you enter your master password again</li>
                         <li>We use the stored salt to derive the same key</li>
                         <li>We try to decrypt the verification data</li>
@@ -987,16 +996,15 @@ export default function Home({ isSetup, isUnlocked, onSetupClick }) {
                       </ol>
                     </div>
 
-
                     {/* Explanation of security benefit */}
                     <div
-                      className={`p-3 bg-gray-800 border-l-4 ${
+                      className={`p-2 sm:p-3 bg-gray-800 border-l-4 ${
                         animationStep === 3
                           ? "border-green-600"
                           : "border-gray-700"
                       } transition-colors duration-300`}
                     >
-                      <p className="text-sm">
+                      <p className="text-xs sm:text-sm">
                         Even if the database is compromised, attackers only get
                         the salt and hash - they still can't decrypt your
                         passwords without knowing your master password.
@@ -1005,7 +1013,7 @@ export default function Home({ isSetup, isUnlocked, onSetupClick }) {
 
                     {/* Animated security shield icon during final step */}
                     {animationStep === 3 && (
-                      <div className="absolute -top-4 -right-4 bg-green-900 bg-opacity-30 p-2 rounded-full animate-pulse">
+                      <div className="absolute -top-4 -right-4 bg-green-900 bg-opacity-30 p-2 rounded-full animate-pulse hidden sm:block">
                         <FaShieldAlt className="text-green-500 text-2xl" />
                       </div>
                     )}
@@ -1014,12 +1022,12 @@ export default function Home({ isSetup, isUnlocked, onSetupClick }) {
               </div>
 
               {/* Animation controls/indicators */}
-              <div className="mt-6 flex justify-center">
-                <div className="flex space-x-3">
+              <div className="mt-4 sm:mt-6 flex justify-center">
+                <div className="flex flex-wrap justify-center space-x-1 sm:space-x-3">
                   {[0, 1, 2, 3].map((step) => (
                     <div
                       key={step}
-                      className={`px-2 py-1 rounded-full text-xs font-medium ${
+                      className={`px-1 sm:px-2 py-0.5 sm:py-1 rounded-full text-xs font-medium mb-1 ${
                         step === animationStep
                           ? "bg-blue-600 text-white"
                           : "bg-gray-700 text-gray-400"
@@ -1035,40 +1043,35 @@ export default function Home({ isSetup, isUnlocked, onSetupClick }) {
               </div>
             </div>
 
-
             {/* Technical explanation */}
-            <div className="bg-gray-800 p-4 rounded-lg mt-4">
-              <h4 className="font-semibold mb-2 flex items-center">
+            <div className="bg-gray-800 p-3 sm:p-4 rounded-lg mt-4">
+              <h4 className="font-semibold mb-2 flex items-center text-sm sm:text-base">
                 <FaCode className="text-blue-400 mr-2" />
                 Technical Details
               </h4>
-              <ul className="list-disc pl-5 space-y-1 text-sm text-gray-300">
+              <ul className="list-disc pl-4 sm:pl-5 space-y-0.5 sm:space-y-1 text-xs sm:text-sm text-gray-300">
                 <li>
                   We use <span className="text-blue-300 font-mono">PBKDF2</span>{" "}
                   with{" "}
                   <span className="text-blue-300 font-mono">
                     100,000 iterations
-                  </span>{" "}
-                  to derive your encryption key
+                  </span>
                 </li>
                 <li>
-                  The{" "}
                   <span className="text-yellow-300 font-mono">
-                    verification hash
+                    Verification hash
                   </span>{" "}
-                  confirms your master password is correct
+                  confirms your password
                 </li>
                 <li>
                   Your vault uses{" "}
-                  <span className="text-green-300 font-mono">AES-256-GCM</span>{" "}
-                  encryption for all passwords
+                  <span className="text-green-300 font-mono">AES-256-GCM</span> to encryption for all passwords
                 </li>
                 <li>
                   Each password has its own{" "}
                   <span className="text-blue-300 font-mono">
-                    initialization vector (IV)
-                  </span>{" "}
-                  for added security
+                    initialization vector(IV)
+                  </span>
                 </li>
                 <li>
                   The encrypted verification data contains a known string that
@@ -1076,12 +1079,9 @@ export default function Home({ isSetup, isUnlocked, onSetupClick }) {
                 </li>
               </ul>
             </div>
-
-
           </div>
         </div>
       </div>
-
     </div>
   );
 }
