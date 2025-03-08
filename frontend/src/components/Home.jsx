@@ -1,27 +1,6 @@
 
 
-//               Set Up Your Vault Now
-//             </button>
-//             <p className="mt-3 text-gray-400">
-//               Everything starts with creating your secure master password
-//             </p>
-//           </div>
-//         )}
-//       </div>
 
-//       {/* Visual Process Flow */}
-//       <div className="bg-gray-900 rounded-xl p-6 mb-10 relative overflow-hidden">
-//         <h2 className="text-2xl font-bold mb-8 text-center">How PassVault Works</h2>
-
-//         <div className="hidden lg:block absolute top-0 left-0 w-full h-1 bg-gray-700">
-//     
-
-//       {/* Security Visualization */}
-//       <div className="bg-gray-900 rounded-xl p-6 mb-8">
-//         <h2 className="text-2xl font-bold mb-6 flex items-center">
-//           <FaFingerprint className="text-blue-400 mr-3" />
-//           Security Visualization
-//         </h2>
 
 //                       <span className="bg-gray-900 px-3 py-1 rounded-full text-xs mr-2">
 //                         {isUnlocked ? "Str0ngP@ssw0rd!" : "••••••••••••••"}
