@@ -902,28 +902,7 @@ export default function Home({ isSetup, isUnlocked, onSetupClick }) {
                 className={`relative rounded-lg p-5 border transition-all duration-500 ${statusColors} ${activeClass}`}
               >
                 <div className="flex items-center mb-3">
-                  <div
-                    className={`rounded-full p-2 mr-3 ${statusColors} ${
-                      animationStep === index ? "animate-pulse" : ""
-                    }`}
-                  >
-                    {step.icon}
-                  </div>
-                  <div className="font-bold">{step.title}</div>
-                </div>
-                <p className="text-sm">{step.description}</p>
-                {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute -right-6 top-1/2 transform -translate-y-1/2 z-10">
-                    <FaArrowRight
-                      className={`
-                        ${
-                          step.status === "disabled"
-                            ? "text-gray-700"
-                            : "text-blue-400"
-                        } 
-                        ${animationStep === index ? "animate-bounce" : ""}
-                      `}
-                    />
+
                   </div>
                 )}
               </div>
