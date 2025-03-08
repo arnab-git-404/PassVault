@@ -1,24 +1,5 @@
 
 
-//   );
-
-//           ></div>
-//         </div>
-
-
-//               </div>
-
-//               {/* Example password storage with visibility animation */}
-//               <div className="mt-6">
-//                 <div className="text-center text-sm text-gray-400 mb-3">Example Password Storage</div>
-//                 <div className="border border-gray-700 rounded-lg overflow-hidden">
-//         
-//   );
-// }
-
-
-
-
 
 
 
