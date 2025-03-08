@@ -1,18 +1,6 @@
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-// 4TH Version
+// 4TH Version Of Home page
 import React, { useState, useEffect } from "react";
 // Update the imports section
 import {
