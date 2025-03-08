@@ -191,69 +191,7 @@
 //         <h2 className="text-2xl font-bold mb-8 text-center">How PassVault Works</h2>
 
 //         <div className="hidden lg:block absolute top-0 left-0 w-full h-1 bg-gray-700">
-//           <div className={`h-full ${isSetup ? (isUnlocked ? 'w-full bg-green-500' : 'w-1/2 bg-yellow-500') : 'w-1/4 bg-blue-500'}`}></div>
-//         </div>
-
-//         <div className="grid grid-cols-1 lg:grid-cols-4 gap-3">
-//           {steps.map((step, index) => {
-//             let statusColors;
-//             switch(step.status) {
-//               case 'complete':
-//                 statusColors = "bg-green-900 border-green-500 text-green-300";
-//                 break;
-//               case 'pending':
-//                 statusColors = "bg-yellow-900 border-yellow-500 text-yellow-300";
-//                 break;
-//               default:
-//                 statusColors = "bg-gray-800 border-gray-700 text-gray-500";
-//             }
-
-//             return (
-//               <div key={index} className={`relative rounded-lg p-5 border ${statusColors}`}>
-//                 <div className="flex items-center mb-3">
-//                   <div className={`rounded-full p-2 mr-3 ${statusColors}`}>
-//                     {step.icon}
-//                   </div>
-//                   <div className="font-bold">{step.title}</div>
-//                 </div>
-//                 <p className="text-sm">{step.description}</p>
-//                 {index < steps.length - 1 && (
-//                   <div className="hidden lg:block absolute -right-6 top-1/2 transform -translate-y-1/2 z-10">
-//                     <FaArrowRight className={`${step.status === 'disabled' ? 'text-gray-700' : 'text-blue-400'}`} />
-//                   </div>
-//                 )}
-//               </div>
-//             );
-//           })}
-//         </div>
-//       </div>
-
-//       {/* Security Features Grid */}
-//       <div className="mb-10">
-//         <h2 className="text-2xl font-bold mb-6">Security Features</h2>
-//         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-//           {features.map((feature, index) => (
-//             <div key={index} className="bg-gray-900 hover:bg-gray-800 transition-colors p-6 rounded-xl shadow-lg border border-gray-700">
-//               <div className="flex items-center mb-4">
-//                 <div className="p-3 bg-gray-800 rounded-full mr-4">
-//                   {feature.icon}
-//                 </div>
-//                 <h3 className="text-xl font-bold">{feature.title}</h3>
-//               </div>
-//               <p className="text-gray-300 mb-3">{feature.description}</p>
-//               {feature.status && (
-//                 <div className={`flex items-center ${feature.statusColor} text-sm font-medium mt-2`}>
-//                   {isSetup ?
-//                     <FaCheck className="mr-2" /> :
-//                     <FaExclamationTriangle className="mr-2" />
-//                   }
-//                   {feature.status}
-//                 </div>
-//               )}
-//             </div>
-//           ))}
-//         </div>
-//       </div>
+//     
 
 //       {/* Security Visualization */}
 //       <div className="bg-gray-900 rounded-xl p-6 mb-8">
