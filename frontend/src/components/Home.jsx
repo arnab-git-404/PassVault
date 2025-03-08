@@ -1,24 +1,5 @@
 
-// import React from "react";
-// import { FaShieldAlt, FaKey, FaLock, FaDatabase, FaMobileAlt } from "react-icons/fa";
 
-//       <div className="text-center mb-8">
-//         <h1 className="text-4xl font-bold mb-4">Welcome to PassVault</h1>
-//         <p className="text-xl text-gray-300">Your secure password manager</p>
-
-//         <div className="mt-6 flex justify-center">
-//           <VaultStatus isSetup={isSetup} isUnlocked={isUnlocked} />
-//         </div>
-
-//         {!isSetup && (
-//           <div className="mt-6">
-//             <button
-//               onClick={onSetupClick}
-//               className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold"
-//             >
-
-
-//             >
 //               Set Up Your Vault Now
 //             </button>
 //             <p className="mt-3 text-gray-400">
