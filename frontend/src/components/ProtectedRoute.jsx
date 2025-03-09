@@ -5,10 +5,10 @@ const ProtectedRoute = ({ children }) => {
 
   const { userLoggedIn } = useGlobalContext(); 
 
-  // if (!userLoggedIn || !localStorage.getItem('token')) {
+  if (!userLoggedIn || !localStorage.getItem('token')) {
   
-  //   return <Navigate to="/signin" />;
-  // }
+    return <Navigate to="/signin" />;
+  }
 
   return children;  // Allow the child route to render if user is logged in
 };
