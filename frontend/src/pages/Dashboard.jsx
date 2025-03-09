@@ -1615,7 +1615,7 @@ export default function Dashboard() {
 
     switch (selectedOption) {
       case "Profile":
-        return <Profile user={user || {}} />;
+        return <Profile />;
       case "GeneratePassword":
         return <PasswordManager />;
       case "ShowAllPassword":
