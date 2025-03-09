@@ -20,7 +20,7 @@ class UserHandler:
         message["To"] = email
         
         if purpose == "authentication":
-            message["Subject"] = "[PassVault - Your Verification Code]"
+            message["Subject"] = "[PassVault - Verification Code]"
             body = self._get_verification_template(otp)
         
         elif purpose == "master_key_reset":

@@ -16,6 +16,9 @@ import base64
 from datetime import datetime, timedelta
 from jose import JWTError, jwt, ExpiredSignatureError
 from fastapi import Header
+import bcrypt
+
+
 
 router = APIRouter()
 user_handler = UserHandler(collection)
@@ -74,7 +77,9 @@ def get_current_user(authorization: str = Header(None)):
 
 
 @router.post("/send-otp")
-async def send_otp(user: SendOTPRequest , user_email: str = Depends(get_current_user) ):
+async def send_otp(user: SendOTPRequest):
+
+    user_email: str = Depends(get_current_user)
     try:
         # Generate OTP
         otp = user_handler.generate_otp()
@@ -147,10 +152,14 @@ async def create_user(user: User):
                 "message": "User already exists. Please use a different email."
             })
 
+
+        encoded_Password = bcrypt.hashpw(user.password.encode('utf-8'), bcrypt.gensalt(14))
+
         if int(user.otp) == int(otp_from_redis):
             # OTP matched, save user to database
             user.otp = otp_from_redis
             user.isVerified = True
+            user.password = encoded_Password
             
             collection.insert_one(dict(user))
             created_user = collection.find_one({"email": user.email})
@@ -201,22 +210,96 @@ async def create_user(user: User):
             "message": f"Internal Server Error: {str(e)}"
         })
 
+# @router.post("/signin")
+# async def signin_user(user: UserLogin):
+#     try:
+#         existing_user = collection.find_one({"email": user.email})
+
+#         if not existing_user:
+#             return JSONResponse(content={
+#                 "status_code": 404, 
+#                 "message": "User not found"
+#             })
+
+#         stored_Password = existing_user["password"]
+#         decoded_Password =  stored_Password.decode('utf-8')
+
+
+#         if decoded_Password != user.password:
+#             return JSONResponse(content={
+#                 "status_code": 401, 
+#                 "message": "Invalid password"
+#             })
+
+#         user_id = str(existing_user["_id"])
+
+#         userDataFromDB = UserInfo(
+#             userId=user_id, 
+#             name=existing_user["name"], 
+#             email=existing_user["email"], 
+#             isVerified=existing_user["isVerified"], 
+#             is_2FA_Enabled=existing_user.get("is_2FA_Enabled", False),
+#             is_google_user=existing_user.get("is_google_user", False), 
+#             profile_picture=str(existing_user.get("profile_picture", ""))
+#         )
+
+#         # Create access token
+#         access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+#         access_token = create_access_token(
+#             data={"email": user.email, "id": user_id}, 
+#             expires_delta=access_token_expires
+#         )
+
+#         response = JSONResponse(content={
+#             "status_code": 200, 
+#             "token": access_token, 
+#             "message": "User Logged In Successfully", 
+#             "user": userDataFromDB.dict()
+#         })
+#         response.set_cookie(
+#             key="access_token", 
+#             value=f"Bearer {access_token}", 
+#             httponly=True, 
+#             secure=True, 
+#             max_age=ACCESS_TOKEN_EXPIRE_MINUTES * 60
+#         )
+        
+#         return response
+    
+#     except Exception as e:
+#         return JSONResponse(content={
+#             "status_code": 500, 
+#             "message": f"Unable to Sign In User: {str(e)}"
+#         })
+
+
+
+
 @router.post("/signin")
 async def signin_user(user: UserLogin):
     try:
         existing_user = collection.find_one({"email": user.email})
 
         if not existing_user:
-            return JSONResponse(content={
-                "status_code": 404, 
-                "message": "User not found"
-            })
+            return JSONResponse(
+                status_code=404,
+                content={
+                    "status_code": 404, 
+                    "message": "User not found"
+                }
+            )
 
-        if existing_user["password"] != user.password:
-            return JSONResponse(content={
-                "status_code": 401, 
-                "message": "Invalid password"
-            })
+        stored_password = existing_user["password"]
+        
+        # Check password using bcrypt.checkpw
+        if not bcrypt.checkpw(user.password.encode('utf-8'), stored_password):
+            return JSONResponse(
+                status_code=401,
+                content={
+                    "status_code": 401, 
+                    "message": "Invalid password"
+                }
+            )
 
         user_id = str(existing_user["_id"])
 
@@ -237,12 +320,15 @@ async def signin_user(user: UserLogin):
             expires_delta=access_token_expires
         )
 
-        response = JSONResponse(content={
-            "status_code": 200, 
-            "token": access_token, 
-            "message": "User Logged In Successfully", 
-            "user": userDataFromDB.dict()
-        })
+        response = JSONResponse(
+            status_code=200,
+            content={
+                "status_code": 200, 
+                "token": access_token, 
+                "message": "User Logged In Successfully", 
+                "user": userDataFromDB.dict()
+            }
+        )
         response.set_cookie(
             key="access_token", 
             value=f"Bearer {access_token}", 
@@ -254,10 +340,34 @@ async def signin_user(user: UserLogin):
         return response
     
     except Exception as e:
-        return JSONResponse(content={
-            "status_code": 500, 
-            "message": f"Unable to Sign In User: {str(e)}"
-        })
+        return JSONResponse(
+            status_code=500,
+            content={
+                "status_code": 500, 
+                "message": f"Unable to Sign In User: {str(e)}"
+            }
+        )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @router.delete('/delete-account')
 async def delete_account(user_email: str = Depends(get_current_user)):

@@ -15,6 +15,9 @@ import {
 } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useGlobalContext } from "../context/context";
+import { useMasterPassword } from "../context/MasterPasswordContext";
+
+
 
 function Settings() {
   const navigate = useNavigate();
@@ -35,6 +38,9 @@ function Settings() {
   const [otp, setOtp] = useState("");
   const [sendingOTP, setSendingOTP] = useState(false);
   const serverURL = import.meta.env.VITE_APP_SERVER_URL;
+
+  // user current state 
+  const { isSetup } = useMasterPassword();
 
 
   // Redirect if not logged in

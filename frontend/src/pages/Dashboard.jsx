@@ -1621,20 +1621,16 @@ export default function Dashboard() {
       case "ShowAllPassword":
         return <ShowAllPassword />;
       case "2FA":
-        return <TwoFactorAuth email={user.email || ""} />;
+        return <TwoFactorAuth />;
       case "LogOut":
-        lockVault();
-        logoutUser();
-        localStorage.clear();
-        navigate("/signin");
-        toast.success("Logged Out Successfully");
-        return null;
+        return <div className="text-center">Logging out...</div>;
+
 
       case "MasterPasswordSetup":
         return <MasterPasswordSetup />;
       case "Settings":
-        navigate("/settings");
-        return null;
+        return <div className="text-center">Redirecting to settings...</div>;
+
       case "Home":
       default:
         return (
@@ -1646,6 +1642,24 @@ export default function Dashboard() {
         );
     }
   };
+
+
+  useEffect(() => {
+    if (selectedOption === "Settings") {
+      navigate("/settings");
+    }
+  }, [selectedOption, navigate]);
+  
+  useEffect(() => {
+    if (selectedOption === "LogOut") {
+      lockVault();
+      logoutUser();
+      localStorage.clear();
+      navigate("/signin");
+      toast.success("Logged Out Successfully");
+    }
+  }, [selectedOption]);
+
 
   return (
     <div className="flex min-h-screen bg-gray-800">

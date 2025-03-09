@@ -341,9 +341,10 @@ import {
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useGlobalContext } from "../context/context";
-
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+
+
 
 // Firebase config - keeping exactly as provided by Firebase
 const firebaseConfig = {
@@ -537,9 +538,11 @@ function UserSignUp() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+
         },
         body: JSON.stringify({
           email,
+          purpose:'authentication',
         }),
       });
 
