@@ -369,9 +369,10 @@ function UserSignUp() {
   const [otp, setOTP] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [sendingOTP, setSendingOTP] = useState(false);
-  const navigate = useNavigate();
+  const [storingDataToDB, setStoringDataToDB] = useState(false);
 
   const serverURL = import.meta.env.VITE_APP_SERVER_URL;
+  const navigate = useNavigate();
 
   const { loginUser, userLoggedIn } = useGlobalContext();
 
@@ -490,7 +491,7 @@ function UserSignUp() {
       toast.error("Please enter the OTP");
       return;
     }
-
+    setStoringDataToDB(true);
     try {
       const res = await fetch(`${serverURL}/api/user/signup`, {
         method: "POST",
@@ -521,6 +522,8 @@ function UserSignUp() {
     } catch (error) {
       console.error("Error signing up: ", error.message);
       toast.error("Failed to sign up: " + error.message);
+    } finally{
+      setStoringDataToDB(false);
     }
   };
 
@@ -566,6 +569,7 @@ function UserSignUp() {
       toast.error("Failed to send OTP");
     } finally {
       setSendingOTP(false);
+
     }
   };
 
@@ -695,7 +699,17 @@ function UserSignUp() {
                   id="loginButton"
                   type="submit"
                 >
-                  Sign Up
+
+                                    {storingDataToDB ? (
+                                        <>
+                                          <FaSpinner className="inline mr-2 animate-spin" />
+                                          Registering...
+                                        </>
+                                      ) : (
+                                        "Sign Up"
+                                      )}
+                  
+
                 </button>
               </div>
 
