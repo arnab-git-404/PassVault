@@ -2,22 +2,7 @@
 // import React from "react";
 // import { FaLock, FaLockOpen, FaQuestionCircle } from "react-icons/fa";
 
-// export default function VaultStatus({ isSetup, isUnlocked }) {
 
-//   let status = "Not Set Up";
-
-//         mainText: "Vault Locked",
-//         subText: "Unlock to access your passwords",
-//         color: "bg-red-700",
-//         textColor: "text-red-100",
-//         progressWidth: "w-2/3",
-//         progressColor: "bg-red-400"
-//       };
-//     } else {
-//       return {
-//         icon: <FaLockOpen />,
-//         mainText: "Vault Unlocked",
-//         subText: "Your passwords are accessible",
 //         color: "bg-green-700",
 //         textColor: "text-green-100",
 //         progressWidth: "w-full",
