@@ -1,28 +1,4 @@
 
-//     try {
-//       const res = await fetch(`${serverURL}/api/password/save-password`, {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//           Authorization: `Bearer ${token}`,
-//         },
-//         body: JSON.stringify(newEntry),
-//       });
-
-//       const data = await res.json();
-//       // console.log(data);
-//       if (data.status_code === 200) {
-//         toast.success(data.message);
-//         setTitle("");
-//         setPassword("");
-//       }
-//     } catch (error) {
-//       console.log("Failed to Save Password", error);
-//       toast.error(error.message);
-//     }
-//   };
-
-
 
 //   // // Test code
 //   // const master = "Ayush";
