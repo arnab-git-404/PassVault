@@ -8,24 +8,6 @@
 //   let icon = <FaQuestionCircle className="text-yellow-500" size={20} />;
 //   let color = "bg-yellow-800";
   
-//   if (isSetup && isUnlocked) {
-//     status = "Unlocked";
-//     icon = <FaLockOpen className="text-green-500" size={20} />;
-//     color = "bg-green-800";
-//   } else if (isSetup && !isUnlocked) {
-//     status = "Locked";
-//     icon = <FaLock className="text-red-500" size={20} />;
-//     color = "bg-red-800";
-//   }
-  
-//   return (
-//     <div className={`flex items-center ${color} px-3 py-1 rounded-full text-sm`}>
-//       {icon}
-//       <span className="ml-2">{status}</span>
-//     </div>
-//   );
-// }
-
 
 
 // 2ND Version 

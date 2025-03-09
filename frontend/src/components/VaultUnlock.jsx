@@ -31,7 +31,7 @@ const VaultUnlock = () => {
         // Password is correct, unlock the vault
         const vaultStatus =  await unlockVault(password);
         console.log("Is Vault Unlocked?:", isUnlocked);
-        console.log("Master Key:", masterKey);
+        
 
         // if( vaultStatus ){
         //   toast.success("Vault unlocked!");
