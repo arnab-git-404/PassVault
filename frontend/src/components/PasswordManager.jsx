@@ -1,21 +1,4 @@
 // import { useState } from "react";
-// import GeneratePassword from "./GeneratePassword";
-// import SavePassword from "./ListAllPassword";
-// import { toast } from "react-toastify";
-// import { useGlobalContext } from "../context/context";
-// // import { EncryptPassword, DecryptPassword } from "../utility/EncryptPassword";
-
-// const PasswordManager = () => {
-//   const [title, setTitle] = useState("");
-//   // const [platform, setPlatform] = useState("");
-//   const [password, setPassword] = useState("");
-
-//   const { user, masterPassword } = useGlobalContext();
-
-//   console.log("User Email In PasswordManager:", user.email);
-
-//   const serverURL = "http://127.0.0.1:8000";
-//   const token = localStorage.getItem("token");
 
 //   const handleSavePassword = async () => {
 //     if (!title) {
