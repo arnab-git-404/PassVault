@@ -443,10 +443,10 @@ function UserSignIn() {
       return;
     }
 
-    if(!gAuthCode){
-      toast.error("2FA Code is required");
-      return;
-    }
+    // if(!gAuthCode ){
+    //   toast.error("2FA Code is required");
+    //   return;
+    // }
 
     try {
       const res = await fetch(`${serverURL}/api/user/signin`, {

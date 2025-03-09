@@ -639,7 +639,7 @@ function UserSignUp() {
               <div className="mb-3 flex justify-between">
                 
                 <div>
-                  <label
+                <label
                     htmlFor="otp"
                     className="block text-lg font-medium text-gray-700"
                   >
