@@ -3,31 +3,24 @@ import { LogOut, Settings, Download, Star, Search, User } from "lucide-react";
 import Profile from "./Profile";
 import { useGlobalContext } from "../context/context";
 import { toast } from "react-toastify";
+import { useMasterPassword } from "../context/MasterPasswordContext";
+import { useNavigate } from "react-router-dom";
 
-export default function ProfileModal( {isOpen, onClose, user } ) {
+export default function ProfileModal({ isOpen, onClose, user }) {
+  if (!isOpen) return null;
 
-    if (!isOpen) return null;
-  
-  const [showProfile, setShowProfile] = useState(false);
 
   const { logoutUser } = useGlobalContext();
+  const { lockVault } = useMasterPassword();
+  const navigate = useNavigate();
 
-
-
-  const handleProfileClick = () => {
-    
-    setShowProfile(true);
-  };
 
 
   return (
     <div className="relative  z-1">
-
-        <div className="absolute right-3 mt-2 w-80 bg-black text-white rounded-lg shadow-lg p-4">
-          <ul className="space-y-2">
-
-
-            {/* <li className="flex items-center p-2 hover:bg-gray-600 rounded cursor-pointer" onClick={handleProfileClick}>
+      <div className="absolute right-3 mt-2 w-80 bg-black text-white rounded-lg shadow-lg p-4">
+        <ul className="space-y-2">
+          {/* <li className="flex items-center p-2 hover:bg-gray-600 rounded cursor-pointer" onClick={handleProfileClick}>
               <User className="w-4 h-4 mr-2" /> Profile
             </li>
             <li className="flex items-center p-2 hover:bg-gray-700 rounded cursor-pointer">
@@ -46,19 +39,20 @@ export default function ProfileModal( {isOpen, onClose, user } ) {
               <Search className="w-4 h-4 mr-2" /> Get ChatGPT search extension
             </li> */}
 
-
-            <li className="flex items-center p-2 rounded cursor-pointer text-red-500" onClick={()=>{logoutUser()
-              toast.success("Logged out successfully")
-            } } >
-              <LogOut className="w-4 h-4 mr-2" /> Log out
-            </li>
-
-
-          </ul>
-        </div>
-      
+          <li
+            className="flex items-center p-2 rounded cursor-pointer text-red-500"
+            onClick={() => {
+              lockVault();
+              logoutUser();
+              localStorage.clear();
+              navigate("/signin");
+              toast.success("Logged Out Successfully");
+            }}
+          >
+            <LogOut className="w-4 h-4 mr-2" /> Log out
+          </li>
+        </ul>
+      </div>
     </div>
   );
 }
-
-

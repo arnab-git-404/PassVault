@@ -1,14 +1,15 @@
 import React, { use } from "react";
 import { useGlobalContext } from "../context/context";
-import { Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import { useMasterPassword } from "../context/MasterPasswordContext";
+import { toast } from "react-toastify";
 
 export default function Profile() {
 
-  const { logoutUser } = useGlobalContext();
-  const {user} = useGlobalContext();
-
+  const { logoutUser,user } = useGlobalContext();
+  const {lockVault} = useMasterPassword(); 
+  const navigate = useNavigate();
 
 
   return (
@@ -42,7 +43,15 @@ export default function Profile() {
         </button>
         <button
           className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded hover:cursor-pointer "
-          onClick={() => logoutUser()}
+          onClick={() => {
+            
+            lockVault();
+            logoutUser();
+            localStorage.clear();
+            toast.success("Logged Out Successfully");
+            navigate("/signin");
+          }
+          }
         >
           Logout
         </button>

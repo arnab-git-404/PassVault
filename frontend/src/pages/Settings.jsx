@@ -392,6 +392,7 @@ function Settings() {
                       "Send OTP"
                     )}
                   </button>
+                  
                 </div>
 
                 <button

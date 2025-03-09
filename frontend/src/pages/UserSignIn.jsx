@@ -8,7 +8,7 @@
 // import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 // import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
-  
+
 // const firebaseConfig = {
 //   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
 //   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -43,7 +43,7 @@
 //   // console.log(userLoggedIn);
 
 //   const handleGoogleSignIn = async (e) => {
-  
+
 //     try {
 //       const provider = new GoogleAuthProvider();
 //       const result = await signInWithPopup(auth, provider);
@@ -76,7 +76,7 @@
 //         localStorage.setItem("token", data.token);
 //         loginUser(data.user);
 //         navigate("/dashboard");
-      
+
 //       } else {
 //         toast.error(data.message || "Authentication failed");
 //       }
@@ -150,7 +150,7 @@
 //         toast.success(data.message);
 //         localStorage.setItem("token", data.token);
 //         loginUser(data.user);
-        
+
 //         // setMasterPassword(password);
 
 //         console.log("User Data From SigniN Page:", data.user);
@@ -276,18 +276,13 @@
 
 // export default UserSignIn;
 
-
-
-
-
 // @ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom";
 // import { useGlobalContext } from "../context/context";
 // import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 // import { initializeApp } from "firebase/app";
 
-
 // import { getAnalytics } from "firebase/analytics";
-  
+
 // const firebaseConfig = {
 //   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
 //   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -295,11 +290,9 @@
 //   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 // };
 
-
 // const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 // const auth = getAuth(app);
-
 
 // function UserSignIn() {
 
@@ -324,7 +317,7 @@
 
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { FaGoogle } from "react-icons/fa";
+import { FaGoogle,FaSpinner } from "react-icons/fa";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -332,7 +325,7 @@ import { useGlobalContext } from "../context/context";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-  
+
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -351,9 +344,11 @@ function UserSignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const { loginUser, userLoggedIn, setMasterPassword } = useGlobalContext();
   const [gAuthCode, setgAuthCode] = useState("");
-
+  const [verifyingPassword, setVerifyingPassword] = useState(false); 
+  
+  
+  const { loginUser, userLoggedIn, setMasterPassword } = useGlobalContext();
   const serverURL = import.meta.env.VITE_APP_SERVER_URL;
 
   let navigate = useNavigate();
@@ -448,6 +443,8 @@ function UserSignIn() {
     //   return;
     // }
 
+    setVerifyingPassword(true);
+
     try {
       const res = await fetch(`${serverURL}/api/user/signin`, {
         method: "POST",
@@ -475,9 +472,6 @@ function UserSignIn() {
         toast.success(data.message);
         localStorage.setItem("token", data.token);
         loginUser(data.user);
-        
-        // Uncomment if you want to set master password
-        // setMasterPassword(password);
 
         console.log("User Data From SignIn Page:", data.user);
 
@@ -486,6 +480,8 @@ function UserSignIn() {
     } catch (error) {
       console.error("Failed to Sign In:", error);
       toast.error("Failed to Sign In");
+    } finally{
+      setVerifyingPassword(false);
     }
   };
 
@@ -521,7 +517,7 @@ function UserSignIn() {
                 />
               </div>
 
-<div className="mb-3 relative">
+              <div className="mb-3 relative">
                 <label
                   htmlFor="password"
                   className="block text-lg font-medium text-gray-700"
@@ -565,11 +561,6 @@ function UserSignIn() {
                 />
               </div>
 
-
-
-
-
-
               <div className="text-right py-3">
                 <Link
                   to={"/forget-password"}
@@ -584,7 +575,15 @@ function UserSignIn() {
                   id="loginButton"
                   type="submit"
                 >
-                  Sign In
+                  {verifyingPassword ? (
+                      <>
+                        <FaSpinner className="inline mr-2 animate-spin" />
+                        Verifying...
+                      </>
+                    ) : (
+                      "Sign In"
+                    )}
+
                 </button>
               </div>
             </form>
