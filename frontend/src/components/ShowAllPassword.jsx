@@ -55,100 +55,25 @@ const { masterKey, masterSalt   } = useMasterPassword();
     fetchSavedPasswords();
   }, [prefilledPassword, user?.email]);
 
-  // const fetchSavedPasswords = async () => {
-  //   if (!user?.email) return;
-
-  //   setLoading(true);
-
-  //   try {
-  //     const res = await fetch(
-  //       `${serverURL}/api/password/show-passwords/${user.email}`,
-  //       {
-  //         method: "GET",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
-
-  //     const data = await res.json();
-  //     console.log("Data: ", data);
-
-      
-  //     if (data.status_code === 200 && data.passwords) {
-  //       // Extract the passwords array from the first item if it exists
-  //       const passwordsArray = data.passwords[0]?.passwords || [];
-
-
-  //       if (!masterSalt || !masterKey) {
-  //         // If vault is locked, show encrypted passwords
-  //         setSavedPasswords(passwordsArray);
-  //       } else {
-  //         // Create a new array with decrypted passwords
-  //         const decryptedPasswords = await Promise.all(
-  //           passwordsArray.map(async (item) => {
-  //             const decryptedPassword = await decryptPassword(
-  //               item.password,
-  //               masterKey,
-  //               item.masterSalt
-  //             );
-  //             // Return a new object with the decrypted password
-  //             return {
-  //               ...item,
-  //               originalPassword: item.password, // Keep encrypted version
-  //               password: decryptedPassword || item.password, // Use decrypted or fallback to encrypted
-  //             };
-  //           })
-  //         );
-
-  //         setSavedPasswords(decryptedPasswords);
-  //       }
-
-  //       if(!masterKey || !masterSalt){
-
-  //       }
-
-
-
-  //     }
-  //   } catch (error) {
-  //     console.error("Failed to fetch passwords", error);
-  //     toast.error("Failed to load saved passwords");
-  //   }
-  // };
-
-  // console.log("Saved Passwords", savedPasswords);
-
-
+  
   const fetchSavedPasswords = async () => {
-    if (!user?.email) return;
+    if (!user?.email){
+      return;
+    }
 
     setLoading(true);
-
     try {
 
-
-
-
-      const master = "Ayush";
-      const plain = "secretPassword123";
-      const encrypted = await encryptPassword(plain, master, masterSalt);
-      const decrypted = await decryptPassword(encrypted, master, masterSalt);
-      console.log("Original:", plain);
-      console.log("Encrypted:", encrypted);
-      console.log("Decrypted:", decrypted);
-      console.log("Match:", plain === decrypted);
+      // Testing 
+      // const master = "Ayush";
+      // const plain = "secretPassword123";
+      // const encrypted = await encryptPassword(plain, master, masterSalt);
+      // const decrypted = await decryptPassword(encrypted, master, masterSalt);
+      // console.log("Original:", plain);
+      // console.log("Encrypted:", encrypted);
+      // console.log("Decrypted:", decrypted);
+      // console.log("Match:", plain === decrypted);
     
-
-
-
-
-
-
-
-
-
       const res = await fetch(
         `${serverURL}/api/password/show-passwords`,
         {
@@ -161,10 +86,9 @@ const { masterKey, masterSalt   } = useMasterPassword();
       );
 
       const data = await res.json();
-      console.log("Data: ", data);
+      // console.log("Data: ", data);
 
-      console.log("Master Salt: ", masterKey);
-      console.log("Master Salt: ", masterSalt);
+
 
       if (data.status_code === 200 && data.passwords) {
         // Extract the passwords array from the first item if it exists
@@ -213,6 +137,8 @@ const { masterKey, masterSalt   } = useMasterPassword();
     } catch (error) {
       console.error("Failed to fetch passwords", error);
       toast.error("Failed to load saved passwords");
+      
+    }finally{
       setLoading(false);
     }
   };
