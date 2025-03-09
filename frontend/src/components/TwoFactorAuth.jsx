@@ -3,7 +3,7 @@ import axios from "axios";
 import { useGlobalContext } from "../context/context";
 import { toast } from "react-toastify";
 
-export default function TwoFactorAuth({ email }) {
+export default function TwoFactorAuth() {
   const { user } = useGlobalContext();
 
   const [is2FAEnabled, setIs2FAEnabled] = useState(false);
@@ -14,7 +14,7 @@ export default function TwoFactorAuth({ email }) {
 
 
   const serverUrl = "http://127.0.0.1:8000";
-  console.log("2FA User Email: ", email);
+  console.log("2FA User Email: ", user.email);
 
   console.log("2FA Enabled: ", user.is_2FA_Enabled);
 
