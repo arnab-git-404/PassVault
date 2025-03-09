@@ -1,16 +1,4 @@
 
-// import React from "react";
-// import { FaLock, FaLockOpen, FaQuestionCircle } from "react-icons/fa";
-
-
-//         color: "bg-green-700",
-//         textColor: "text-green-100",
-//         progressWidth: "w-full",
-//         progressColor: "bg-green-400"
-//       };
-//     }
-//   };
-
 //   const config = getStatusConfig();
 
 //   return (
