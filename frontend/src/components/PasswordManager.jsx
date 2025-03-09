@@ -1,21 +1,3 @@
-// import { useState } from "react";
-
-//   const handleSavePassword = async () => {
-//     if (!title) {
-//       toast.error("Platform Name is required");
-//       return;
-//     }
-
-//     if (!password) {
-//       toast.error("Password is required");
-//       return;
-//     }
-
-
-//     // Encrypt password with master password before sending
-//     // const encryptedPassword = EncryptPassword(password, masterPassword);
-
-//     const newEntry = { email: user.email, title, password };
 
 //     try {
 //       const res = await fetch(`${serverURL}/api/password/save-password`, {
