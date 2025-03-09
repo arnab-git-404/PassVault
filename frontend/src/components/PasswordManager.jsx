@@ -1,39 +1,4 @@
 
-
-//   // // Test code
-//   // const master = "Ayush";
-//   // const plain = "secretPassword123";
-//   // const encrypted = EncryptPassword(plain, master);
-
-//     <div className="w-full max-w-4xl p-6">
-//       <h2 className="text-2xl font-bold mb-6 text-center">
-//         Generate Password & Save
-//       </h2>
-//       <h2 className="text-2xl font-bold mb-6 text-center">Password Manager</h2>
-
-//       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-//         {/* Password Generation Section */}
-// @ -140,7 +105,7 @@ const PasswordManager = () => {
-//             />
-
-//             <button
-//               className=" hover:cursor-pointer w-full bg-blue-600 p-2 rounded hover:bg-blue-700"
-//               className="w-full bg-blue-600 p-2 rounded hover:bg-blue-700"
-//               on
-//               onClick={handleSavePassword}
-//             >
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import GeneratePassword from "./GeneratePassword";
