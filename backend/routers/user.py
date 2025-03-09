@@ -210,12 +210,6 @@ async def create_user(user: User):
             "message": f"Internal Server Error: {str(e)}"
         })
 
-# @router.post("/signin")
-# async def signin_user(user: UserLogin):
-
-
-
-
 
 @router.post("/signin")
 async def signin_user(user: UserLogin):
@@ -289,17 +283,6 @@ async def signin_user(user: UserLogin):
                 "message": f"Unable to Sign In User: {str(e)}"
             }
         )
-
-
-
-
-
-
-
-
-
-
-
 
 
 
