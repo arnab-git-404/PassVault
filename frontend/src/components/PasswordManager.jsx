@@ -158,27 +158,6 @@
 
 //   console.log("User Email In PasswordManager:", user.email);
 
-//   const serverURL = "http://127.0.0.1:8000";
-//   const token = localStorage.getItem("token");
-
-
-//   const handleSavePassword = async () => {
-
-//     try {
-//       const res = await fetch(`${serverURL}/api/password/save-password`, {
-//         method: "POST",
-//         headers: {
-// @ -82,7 +46,6 @@ const PasswordManager = () => {
-
-//       const data = await res.json();
-//       // console.log(data);
-
-//       if (data.status_code === 200) {
-//         toast.success(data.message);
-//         setTitle("");
-// @ -94,21 +57,23 @@ const PasswordManager = () => {
-//     }
-//   };
 
 //   // Test code
 //   // const master = "Ayush9856";
