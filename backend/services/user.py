@@ -30,6 +30,7 @@ class UserHandler:
         elif purpose == "reset_password":
             message["Subject"] = "[PassVault - Password Reset Code] "
             body = self._get_reset_template(otp)
+            
         else:
             message["Subject"] = "[PassVault - Verification Code]"
             body = self._get_generic_template(otp)
