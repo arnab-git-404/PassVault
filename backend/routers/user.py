@@ -212,43 +212,6 @@ async def create_user(user: User):
 
 # @router.post("/signin")
 # async def signin_user(user: UserLogin):
-#     try:
-#         existing_user = collection.find_one({"email": user.email})
-
-#         if not existing_user:
-#             return JSONResponse(content={
-#                 "status_code": 404, 
-#                 "message": "User not found"
-#             })
-
-#         stored_Password = existing_user["password"]
-#         decoded_Password =  stored_Password.decode('utf-8')
-
-
-#         if decoded_Password != user.password:
-#             return JSONResponse(content={
-#                 "status_code": 401, 
-#                 "message": "Invalid password"
-#             })
-
-#         user_id = str(existing_user["_id"])
-
-#         userDataFromDB = UserInfo(
-#             userId=user_id, 
-#             name=existing_user["name"], 
-#             email=existing_user["email"], 
-#             isVerified=existing_user["isVerified"], 
-#             is_2FA_Enabled=existing_user.get("is_2FA_Enabled", False),
-#             is_google_user=existing_user.get("is_google_user", False), 
-#             profile_picture=str(existing_user.get("profile_picture", ""))
-#         )
-
-#         # Create access token
-#         access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-#         access_token = create_access_token(
-#             data={"email": user.email, "id": user_id}, 
-#             expires_delta=access_token_expires
-#         )
 
 #         response = JSONResponse(content={
 #             "status_code": 200, 
