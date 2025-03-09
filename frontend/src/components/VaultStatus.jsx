@@ -1,25 +1,4 @@
 
-//   const config = getStatusConfig();
-
-//   return (
-//     <div className={`rounded-lg ${config.color} p-2 shadow-lg flex items-center`}>
-//       <div className={`p-2 rounded-full ${config.textColor} mr-3`}>
-//         {config.icon}
-//       </div>
-//       <div className="mr-3">
-//         <div className={`font-bold ${config.textColor}`}>{config.mainText}</div>
-//         <div className={`text-xs ${config.textColor} opacity-90`}>{config.subText}</div>
-//         <div className="w-32 bg-gray-800 rounded-full h-1.5 mt-1">
-//           <div className={`${config.progressWidth} ${config.progressColor} h-1.5 rounded-full`}></div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-
-
-// 3rd Version
 import React, { useState, useEffect } from "react";
 import { FaLock, FaLockOpen, FaShieldAlt, FaCog } from "react-icons/fa";
 
