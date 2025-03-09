@@ -5,31 +5,7 @@
 // export default function VaultStatus({ isSetup, isUnlocked }) {
 
 //   let status = "Not Set Up";
-//   let icon = <FaQuestionCircle className="text-yellow-500" size={20} />;
-//   let color = "bg-yellow-800";
-  
 
-
-// 2ND Version 
-// import React from "react";
-// import { FaLock, FaLockOpen, FaShieldAlt, FaCog } from "react-icons/fa";
-
-// export default function VaultStatus({ isSetup, isUnlocked }) {
-//   // Determine status configuration based on vault state
-//   const getStatusConfig = () => {
-//     if (!isSetup) {
-//       return {
-//         icon: <FaCog className="animate-spin" />,
-//         mainText: "Setup Required",
-//         subText: "Your vault needs to be configured",
-//         color: "bg-yellow-600",
-//         textColor: "text-yellow-100",
-//         progressWidth: "w-1/3",
-//         progressColor: "bg-yellow-400"
-//       };
-//     } else if (isSetup && !isUnlocked) {
-//       return {
-//         icon: <FaLock />,
 //         mainText: "Vault Locked",
 //         subText: "Unlock to access your passwords",
 //         color: "bg-red-700",
