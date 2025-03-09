@@ -213,27 +213,6 @@ async def create_user(user: User):
 # @router.post("/signin")
 # async def signin_user(user: UserLogin):
 
-#         response = JSONResponse(content={
-#             "status_code": 200, 
-#             "token": access_token, 
-#             "message": "User Logged In Successfully", 
-#             "user": userDataFromDB.dict()
-#         })
-#         response.set_cookie(
-#             key="access_token", 
-#             value=f"Bearer {access_token}", 
-#             httponly=True, 
-#             secure=True, 
-#             max_age=ACCESS_TOKEN_EXPIRE_MINUTES * 60
-#         )
-        
-#         return response
-    
-#     except Exception as e:
-#         return JSONResponse(content={
-#             "status_code": 500, 
-#             "message": f"Unable to Sign In User: {str(e)}"
-#         })
 
 
 
