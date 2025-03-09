@@ -259,7 +259,9 @@ function Settings() {
     }
   };
 
-  // Add this function to handle the master key reset
+
+
+  // master key reset Confirmation PopUp
   const handleMasterKeyReset = async (e) => {
     e.preventDefault();
 
@@ -290,7 +292,7 @@ function Settings() {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          email: user.email,
+          // email: user.email,
           purpose: "master_key_reset",
         }),
       });
@@ -312,8 +314,6 @@ function Settings() {
 
   return (
     <div className="bg-gray-900 min-h-screen py-6">
-
-
 
         <div className="max-w-5xl mx-auto px-4 py-8">
         {/* Header Section */}

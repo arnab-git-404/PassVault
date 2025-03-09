@@ -74,16 +74,16 @@ def get_current_user(authorization: str = Header(None)):
 
 
 @router.post("/send-otp")
-async def send_otp(user: SendOTPRequest):
+async def send_otp(user: SendOTPRequest , user_email: str = Depends(get_current_user) ):
     try:
         # Generate OTP
         otp = user_handler.generate_otp()
         
         # Store OTP in Redis with an expiry time of 5 minutes
-        res = r.setex(user.email, OTP_EXPIRY_TIME, otp)
+        res = r.setex(user.email or user_email , OTP_EXPIRY_TIME, otp)
         
         # Send email with OTP
-        success = user_handler.send_otp_email(user.email, otp, user.purpose)
+        success = user_handler.send_otp_email(user.email or user_email, otp, user.purpose)
         
         if not success:
             return JSONResponse(content={"status_code": 500, "message": "Failed to send OTP. Please try again."})
@@ -669,7 +669,7 @@ async def reset_master_key(
         
         # Delete all passwords associated with the user
         passwords_collection = db["password"]
-        delete_result = passwords_collection.delete_many({"user_id": str(existing_user["_id"])})
+        delete_result = passwords_collection.delete_many({"email": str(existing_user["email"])})
         
         # Remove master key data
         update_result = collection.update_one(

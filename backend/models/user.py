@@ -1,3 +1,4 @@
+from typing import Optional
 from pydantic import BaseModel
 
 
@@ -33,9 +34,15 @@ class UserLogin(BaseModel):
     email: str
     password: str
 
+
+
 class SendOTPRequest(BaseModel):
-    email: str
+    email: Optional[str] = None
     purpose: str
+
+
+
+
 
 class VerifyOTP(BaseModel):
     email: str
