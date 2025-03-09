@@ -163,49 +163,6 @@
 
 
 //   const handleSavePassword = async () => {
-//     if (!title) {
-//       toast.error("Platform Name is required");
-// @ -37,40 +27,14 @@ const PasswordManager = () => {
-//       toast.error("Password is required");
-//       return;
-//     }
-    
-//     try {
-//       // const master = "Ayush";
-//       // const plain = "secretPassword123";
-//       // const encrypted = await encryptPassword(plain, master, userSalt);
-//       // const decrypted = await decryptPassword(encrypted, master, userSalt);
-//       // console.log("Original:", plain);
-//       // console.log("Encrypted:", encrypted);
-//       // console.log("Decrypted:", decrypted);
-//       // console.log("Match:", plain === decrypted);
-//       // const userSalt = generateSalt();
-//       // console.log("UserSalt: ",userSalt);
-      
-
-//       // Encrypt password with master password before sending
-//       const encryptedPassword = await encryptPassword(
-//         password,
-//         masterKey,
-//         masterSalt
-//       );
-
-//       if (!encryptedPassword) {
-//         toast.error("Encryption failed");
-//         return;
-//       }
-
-//       const encryptedTitle = await encryptPassword(
-//         title,
-//         masterKey,
-//         masterSalt
-//       )
-
-//       const newEntry = { email: user.email, title:encryptedTitle, password:encryptedPassword , masterSalt };
-//     // Encrypt password with master password before sending
-//     // const encryptedPassword = EncryptPassword(password, masterPassword);
-
-//     const newEntry = { email: user.email, title, password };
 
 //     try {
 //       const res = await fetch(`${serverURL}/api/password/save-password`, {
